@@ -6,19 +6,19 @@
   --color-electric-cyan: #3EA4F5;
   --color-titanium-grey: #4A4A4A;
   --color-obsidian-glass: rgba(22, 25, 32, 0.8);
-  --color-starlight-white: #F0F4F8;
+  --color-starlight-white: #F9F9F9;
   --color-muted-silver: #9CA3AF;
   --color-neural-violet: #7B61FF;
   --color-hive-gold: #FFD700;
 
   --font-inter: var(--font-inter);
-  --font-monument: "Monument Extended", sans-serif; 
+  --font-monument: "Monument Extended", sans-serif;
 }
 
 /* Custom Utilities / Base Styles */
 @layer base {
   body {
-    @apply bg-deep-void text-starlight-white font-inter;
+    @apply bg-starlight-white text-deep-void font-inter;
   }
 }
 
@@ -26,7 +26,7 @@
   .glass-panel {
     @apply bg-obsidian-glass backdrop-blur-lg border border-titanium-grey/20;
   }
-  
+
   .text-glow {
     text-shadow: 0 0 20px rgba(26, 124, 216, 0.5);
   }

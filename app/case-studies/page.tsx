@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import HoneycombPattern from "@/components/ui/HoneycombPattern";
+import OrigamiCard from "@/components/ui/OrigamiCard";
 
 export const metadata = {
     title: "Case Studies | WebAnts Digital Success Stories",
@@ -7,8 +9,9 @@ export const metadata = {
 
 export default function CaseStudiesPage() {
     return (
-        <main className="min-h-screen bg-deep-void text-starlight-white pt-24 pb-20 px-6 md:px-12 font-inter">
+        <main className="min-h-screen bg-starlight-white text-deep-void pt-24 pb-20 px-6 md:px-12 font-inter">
             {/* Background Ambience */}
+            {/* <HoneycombPattern className="opacity-40" /> */}
             <div className="fixed inset-0 pointer-events-none">
                 <div className="absolute top-20 left-20 w-[600px] h-[600px] bg-electric-cyan/5 rounded-full blur-[150px]" />
             </div>
@@ -18,30 +21,28 @@ export default function CaseStudiesPage() {
                     <h1 className="font-monument text-4xl md:text-7xl uppercase leading-tight mb-6">
                         Proven <span className="text-ants-blue">Results</span>
                     </h1>
-                    <p className="text-xl text-muted-silver max-w-2xl mx-auto">
+                    <p className="text-xl text-gray-600 max-w-2xl mx-auto">
                         We believe in data, not fluff. Explore how we've helped brands scale through biomechanical engineering and strategic marketing.
                     </p>
                 </header>
 
                 {/* Case Study Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="col-span-1 md:col-span-2 p-1 bg-gradient-to-br from-white/10 to-transparent rounded-3xl">
-                        <div className="bg-deep-void h-full w-full rounded-[20px] p-8 md:p-12 border border-white/5 hover:border-ants-blue/50 transition-all group cursor-pointer relative overflow-hidden">
+                    <div className="col-span-1 md:col-span-2">
+                        <OrigamiCard className="h-full">
                             <div className="relative z-10">
                                 <span className="text-electric-cyan font-mono text-xs tracking-widest uppercase mb-2 block">E-commerce • SEO</span>
                                 <h3 className="font-monument text-3xl md:text-4xl uppercase mb-4 group-hover:text-ants-blue transition-colors">Project: Neon Commerce</h3>
-                                <p className="text-muted-silver mb-8 max-w-xl">
+                                <p className="text-gray-600 mb-8 max-w-xl">
                                     How we increased organic traffic by 250% and doubled conversion rates for a national lifestyle brand using Next.js and programmatic SEO.
                                 </p>
-                                <ul className="flex flex-wrap gap-4 text-xs font-mono text-white/60">
-                                    <li className="px-3 py-1 border border-white/10 rounded-full">Next.js</li>
-                                    <li className="px-3 py-1 border border-white/10 rounded-full">Shopify Headless</li>
-                                    <li className="px-3 py-1 border border-white/10 rounded-full">Technical SEO</li>
+                                <ul className="flex flex-wrap gap-4 text-xs font-mono text-deep-void/60">
+                                    <li className="px-3 py-1 border border-deep-void/10 rounded-full">Next.js</li>
+                                    <li className="px-3 py-1 border border-deep-void/10 rounded-full">Shopify Headless</li>
+                                    <li className="px-3 py-1 border border-deep-void/10 rounded-full">Technical SEO</li>
                                 </ul>
                             </div>
-                            {/* Hover Effect */}
-                            <div className="absolute inset-0 bg-ants-blue/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        </div>
+                        </OrigamiCard>
                     </div>
 
                     <ProjectCard title="FinTech Dashboard" category="Web App • Fintech" desc="Designing a high-performance analytics dashboard processing real-time data for 50k+ users." tags={["React", "D3.js", "Python"]} />
@@ -54,15 +55,15 @@ export default function CaseStudiesPage() {
 
 function ProjectCard({ title, category, desc, tags }: any) {
     return (
-        <div className="group bg-white/5 border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-all cursor-pointer">
+        <OrigamiCard className="h-full">
             <span className="text-ants-blue font-mono text-xs tracking-widest uppercase mb-2 block">{category}</span>
             <h3 className="font-monument text-2xl uppercase mb-4">{title}</h3>
-            <p className="text-muted-silver text-sm mb-6">{desc}</p>
-            <ul className="flex flex-wrap gap-2 text-[10px] font-mono text-white/40">
+            <p className="text-gray-600 text-sm mb-6">{desc}</p>
+            <ul className="flex flex-wrap gap-2 text-[10px] font-mono text-deep-void/40">
                 {tags.map((tag: string) => (
-                    <li key={tag} className="px-2 py-1 border border-white/10 rounded-full">{tag}</li>
+                    <li key={tag} className="px-2 py-1 border border-deep-void/10 rounded-full">{tag}</li>
                 ))}
             </ul>
-        </div>
+        </OrigamiCard>
     )
 }

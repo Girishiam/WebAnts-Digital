@@ -31,9 +31,9 @@ export default function Experience() {
                 />
             </EffectComposer>
 
-            {/* Atmosphere (Optimized) */}
-            <Stars radius={100} depth={50} count={1000} factor={4} saturation={0} fade speed={1} />
-            <Sparkles count={50} scale={20} size={3} speed={0.4} opacity={0.5} noise={1} color="#3ea4f5" />
+            {/* Atmosphere (Optimized) - Stars removed for Light Mode */}
+            {/* <Stars radius={100} depth={50} count={1000} factor={4} saturation={0} fade speed={1} /> */}
+            <Sparkles count={50} scale={20} size={4} speed={0.4} opacity={0.8} noise={1} color="#1A7CD8" />
 
             <CameraRig />
 
@@ -45,7 +45,7 @@ export default function Experience() {
                     <MechaAnt scale={0.6} />
                     <FloatingTechStack />
                     {/* Shadow baked once (frames=1) to prevent per-frame re-calc */}
-                    <ContactShadows frames={1} position={[0, -2, 0]} opacity={0.6} scale={10} blur={2.5} far={4.5} color="#000" />
+                    {/* <ContactShadows frames={1} position={[0, -2, 0]} opacity={0.6} scale={10} blur={2.5} far={4.5} color="#000" /> */}
                 </group>
 
             </group>

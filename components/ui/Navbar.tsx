@@ -52,23 +52,23 @@ export default function Navbar() {
             initial="hidden"
             animate="visible"
             variants={navbarVariants}
-            className={`fixed top-0 left-0 right-0 z-50 flex justify-center px-0 xl:px-4 transition-all duration-300 ${scrolled ? 'py-2' : 'py-6'}`}
+            className={`fixed top-0 left-0 right-0 z-50 flex justify-center px-0 xl:px-4 transition-all duration-300 will-change-transform ${scrolled ? 'py-2' : 'py-6'}`}
         >
             <div className={`
-                relative flex items-center justify-between px-6 py-3 rounded-none xl:rounded-full
-                backdrop-blur-3xl border-b xl:border border-white/10 shadow-2xl shadow-ants-blue/5
+                relative flex items-center justify-between px-6 py-2 rounded-full
+                backdrop-blur-xl border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)]
                 transition-all duration-500
-                ${scrolled ? 'bg-[#0a0a0a]/90 w-full xl:max-w-[1600px]' : 'bg-[#0a0a0a]/60 w-full xl:max-w-[1700px]'}
+                ${scrolled ? 'bg-white/90 w-full xl:max-w-[1600px] py-3' : 'bg-white/70 w-full xl:max-w-[1700px] py-4'}
             `}>
 
                 {/* Logo Section */}
                 <Link href="/" className="flex items-center gap-3 group z-50">
-                    <div className="relative w-10 h-10 flex items-center justify-center rounded-lg bg-gradient-to-tr from-ants-blue/20 to-electric-cyan/20 border border-white/5 group-hover:border-electric-cyan/50 transition-colors">
+                    <div className="relative w-10 h-10 flex items-center justify-center rounded-lg bg-gradient-to-tr from-ants-blue/20 to-electric-cyan/20 border border-deep-void/5 group-hover:border-electric-cyan/50 transition-colors">
                         <span className="font-monument text-electric-cyan text-sm group-hover:drop-shadow-[0_0_8px_rgba(0,240,255,0.8)] transition-all">W</span>
                         <span className="absolute top-1 right-1 w-1.5 h-1.5 bg-electric-cyan rounded-full animate-pulse shadow-[0_0_5px_#00F0FF]" />
                     </div>
                     <div className="flex flex-col">
-                        <span className="font-monument text-sm uppercase tracking-widest text-white group-hover:text-electric-cyan transition-colors">WebAnts</span>
+                        <span className="font-monument text-sm uppercase tracking-widest text-deep-void group-hover:text-electric-cyan transition-colors">WebAnts</span>
                     </div>
                 </Link>
 
@@ -167,7 +167,7 @@ export default function Navbar() {
                 {/* Mobile Menu Toggle */}
                 <button
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    className="xl:hidden p-2 text-white hover:text-electric-cyan transition-colors"
+                    className="xl:hidden p-2 text-deep-void hover:text-electric-cyan transition-colors"
                 >
                     {isMobileMenuOpen ? <X /> : <Menu />}
                 </button>
@@ -180,7 +180,7 @@ export default function Navbar() {
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
-                        className="fixed inset-0 z-40 bg-deep-void/95 backdrop-blur-2xl pt-24 px-6 overflow-y-auto"
+                        className="fixed inset-0 z-40 bg-starlight-white/95 backdrop-blur-2xl pt-24 px-6 overflow-y-auto"
                     >
                         <nav className="flex flex-col gap-4 items-center text-center">
                             <MobileNavLink href="/" label="Home" onClick={() => setIsMobileMenuOpen(false)} />
@@ -214,8 +214,8 @@ function NavLink({ href, label, active = false }: { href: string, label: string,
         <Link
             href={href}
             className={`
-                relative px-4 py-2 text-[11px] lg:text-xs font-monument uppercase tracking-wider transition-colors
-                ${active ? 'text-white' : 'text-muted-silver hover:text-white'}
+                relative px-4 py-2 rounded-full text-[11px] lg:text-xs font-monument uppercase tracking-wider transition-all duration-300
+                ${active ? 'bg-deep-void text-white shadow-lg' : 'text-gray-600 hover:text-deep-void hover:bg-gray-100 active:scale-95'}
             `}
         >
             {label}
@@ -233,8 +233,8 @@ function NavDropdown({ label, id, activeId, setActive, children, variants }: any
             onMouseLeave={() => setActive(null)}
         >
             <button className={`
-                flex items-center gap-1 px-4 py-2 text-[11px] lg:text-xs font-monument uppercase tracking-wider transition-colors
-                ${isActive ? 'text-white' : 'text-muted-silver hover:text-white'}
+                flex items-center gap-1 px-4 py-2 rounded-full text-[11px] lg:text-xs font-monument uppercase tracking-wider transition-all duration-300
+                ${isActive ? 'bg-deep-void text-white shadow-lg' : 'text-gray-600 hover:text-deep-void hover:bg-gray-100 active:scale-95'}
             `}>
                 {label}
                 <ChevronDown className={`w-3 h-3 transition-transform duration-300 ${isActive ? 'rotate-180 text-electric-cyan' : ''}`} />
@@ -247,9 +247,10 @@ function NavDropdown({ label, id, activeId, setActive, children, variants }: any
                         initial="hidden"
                         animate="visible"
                         exit="exit"
-                        className="absolute top-full left-1/2 -translate-x-1/2 pt-8 w-auto min-w-[200px]"
+                        style={{ willChange: "opacity, transform" }}
+                        className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-auto min-w-[200px]"
                     >
-                        <div className="bg-[#0B0C10]/95 backdrop-blur-3xl border border-white/10 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
+                        <div className="bg-white backdrop-blur-3xl border border-gray-100 rounded-3xl p-6 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] relative overflow-hidden">
                             <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-electric-cyan/50 to-transparent" />
                             {children}
                         </div>
@@ -262,20 +263,20 @@ function NavDropdown({ label, id, activeId, setActive, children, variants }: any
 
 function DropdownSectionTitle({ icon, title }: { icon: any, title: string }) {
     return (
-        <div className="flex items-center gap-2 mb-4 pb-2 border-b border-white/5">
+        <div className="flex items-center gap-2 mb-4 pb-2 border-b border-deep-void/5">
             <div className="text-electric-cyan w-4 h-4">{icon}</div>
-            <span className="text-[10px] font-monument uppercase tracking-widest text-white/50">{title}</span>
+            <span className="text-[10px] font-monument uppercase tracking-widest text-gray-500">{title}</span>
         </div>
     );
 }
 
 function ServiceLink({ href, title, desc }: { href: string, title: string, desc: string }) {
     return (
-        <Link href={href} className="group block p-3 rounded-lg hover:bg-white/5 transition-all">
-            <div className="font-bold text-xs text-white group-hover:text-electric-cyan transition-colors mb-0.5 font-inter uppercase tracking-wide">
+        <Link href={href} className="group block p-3 rounded-lg hover:bg-deep-void/5 transition-all">
+            <div className="font-bold text-xs text-deep-void group-hover:text-electric-cyan transition-colors mb-0.5 font-inter uppercase tracking-wide">
                 {title}
             </div>
-            <div className="text-[10px] text-muted-silver group-hover:text-white/70 transition-colors font-inter">
+            <div className="text-[10px] text-gray-500 group-hover:text-deep-void/70 transition-colors font-inter">
                 {desc}
             </div>
         </Link>
@@ -287,7 +288,7 @@ function MobileNavLink({ href, label, onClick }: { href: string, label: string, 
         <Link
             href={href}
             onClick={onClick}
-            className="block py-4 text-sm font-monument uppercase tracking-widest text-muted-silver hover:text-white transition-colors"
+            className="block py-4 text-sm font-monument uppercase tracking-widest text-gray-600 hover:text-deep-void transition-colors"
         >
             {label}
         </Link>

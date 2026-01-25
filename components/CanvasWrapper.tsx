@@ -15,7 +15,7 @@ export default function CanvasWrapper() {
                     gl={{ antialias: true, alpha: true }}
                     dpr={[1, 2]} // Optimize for pixel density
                 >
-                    <color attach="background" args={["#0B0D12"]} />
+                    <color attach="background" args={["#F9F9F9"]} />
                     <Suspense fallback={null}>
                         <Experience />
                     </Suspense>

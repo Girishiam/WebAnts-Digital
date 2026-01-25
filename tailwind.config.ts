@@ -12,7 +12,7 @@ const config: Config = {
                 background: "var(--background)",
                 foreground: "var(--foreground)",
                 "deep-void": "#0a0a0a",
-                "starlight-white": "#f0f0f0",
+                "starlight-white": "#F9F9F9",
                 "ants-blue": "#3ea4f5",
                 "electric-cyan": "#00f3ff",
                 "muted-silver": "#888888",

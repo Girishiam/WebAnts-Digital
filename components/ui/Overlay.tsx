@@ -1,4 +1,5 @@
 import Navbar from './Navbar';
+import HoneycombPattern from './HoneycombPattern';
 
 export default function Overlay() {
     return (
@@ -10,21 +11,23 @@ export default function Overlay() {
 
             {/* Main Hero Content - Split Grid */}
             {/* Added pt-24 to clear the fixed navbar */}
-            <div className="flex-1 grid grid-cols-1 md:grid-cols-2 items-center w-full max-w-7xl mx-auto px-6 md:px-12 pt-24">
+            <div className="flex-1 grid grid-cols-1 md:grid-cols-2 items-center w-full max-w-7xl mx-auto px-6 md:px-12 pt-24 relative">
+                <HoneycombPattern className="opacity-60 left-0 top-0 scale-[100%]" scale={50} />
 
                 {/* LEFT: Typography */}
                 <div className="flex flex-col gap-6 items-start text-left pointer-events-auto">
                     {/* SYSTEM ONLINE Badge moved to Navbar */}
-                    <h1 className="font-monument text-5xl md:text-7xl lg:text-8xl uppercase leading-[0.9] text-starlight-white mix-blend-overlay">
+                    <h1 className="font-monument text-5xl md:text-7xl lg:text-8xl uppercase leading-[0.9] text-deep-void">
                         The Digital <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-ants-blue to-electric-cyan">Hive</span>
                     </h1>
-                    <p className="max-w-md font-inter text-muted-silver text-sm md:text-base leading-relaxed">
+                    <p className="max-w-md font-inter text-gray-600 text-sm md:text-base leading-relaxed">
                         We carry the heavy payload of complex technology, making it effortless for you.
                         A biomechanical agency built for the future.
                     </p>
-                    <button className="group mt-4 px-8 py-3 bg-white text-deep-void font-monument text-sm uppercase tracking-wider hover:bg-ants-blue hover:text-white transition-all clip-path-polygon">
-                        Enter the Hive
+                    <button className="group relative mt-4 px-8 py-3 bg-deep-void text-white font-monument text-sm uppercase tracking-wider hover:bg-ants-blue hover:text-white transition-all overflow-hidden clip-path-polygon shadow-lg hover:shadow-electric-cyan/20">
+                        <span className="relative z-10">Enter the Hive</span>
+                        <div className="absolute inset-0 bg-honeycomb-pattern opacity-10" />
                     </button>
                 </div>
 
@@ -35,7 +38,7 @@ export default function Overlay() {
             </div>
 
             {/* Footer / Status */}
-            <footer className="flex justify-between items-end font-inter text-xs text-muted-silver border-t border-white/10 mx-6 md:mx-12 pb-6 pt-6">
+            <footer className="flex justify-between items-end font-inter text-xs text-gray-500 border-t border-deep-void/10 mx-6 md:mx-12 pb-6 pt-6">
                 <div>
                     <p>SCROLL TO EXPLORE</p>
                 </div>
