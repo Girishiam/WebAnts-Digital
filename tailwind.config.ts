@@ -27,6 +27,20 @@ const config: Config = {
                 "gradient-conic":
                     "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
             },
+            keyframes: {
+                "dash-flow": {
+                    "0%": { strokeDashoffset: "100" },
+                    "100%": { strokeDashoffset: "0" },
+                },
+                "pulse-glow": {
+                    "0%, 100%": { opacity: "0.4", r: "2" },
+                    "50%": { opacity: "1", r: "3" },
+                }
+            },
+            animation: {
+                "dash-flow": "dash-flow 2s linear infinite",
+                "pulse-glow": "pulse-glow 3s ease-in-out infinite",
+            }
         },
     },
     plugins: [],

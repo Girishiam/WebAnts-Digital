@@ -26,7 +26,7 @@ export default function FloatingTechStack() {
 
     return (
         <group position={[0, 0.5, 0]}> {/* Centered relative to Ant */}
-            <TechHalo items={allTech} radius={4.5} />
+            <TechHalo items={allTech} radius={3.5} />
         </group>
     );
 }

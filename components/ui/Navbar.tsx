@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -11,19 +11,9 @@ import {
 } from 'lucide-react';
 
 export default function Navbar() {
-    const [scrolled, setScrolled] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const pathname = usePathname();
-
-    // Handle scroll effect
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 20);
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
 
     // Framer Motion Variants
     const navbarVariants: any = {
@@ -52,14 +42,9 @@ export default function Navbar() {
             initial="hidden"
             animate="visible"
             variants={navbarVariants}
-            className={`fixed top-0 left-0 right-0 z-50 flex justify-center px-0 xl:px-4 transition-all duration-300 will-change-transform ${scrolled ? 'py-2' : 'py-6'}`}
+            className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 transition-all duration-300"
         >
-            <div className={`
-                relative flex items-center justify-between px-6 py-2 rounded-full
-                backdrop-blur-xl border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)]
-                transition-all duration-500
-                ${scrolled ? 'bg-white/90 w-full xl:max-w-[1600px] py-3' : 'bg-white/70 w-full xl:max-w-[1700px] py-4'}
-            `}>
+            <div className="relative flex items-center justify-between px-6 md:px-10 py-4 w-full max-w-[1700px] mx-auto">
 
                 {/* Logo Section */}
                 <Link href="/" className="flex items-center gap-3 group z-50">
@@ -180,9 +165,17 @@ export default function Navbar() {
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
-                        className="fixed inset-0 z-40 bg-starlight-white/95 backdrop-blur-2xl pt-24 px-6 overflow-y-auto"
+                        className="fixed inset-0 z-[60] bg-starlight-white/95 backdrop-blur-2xl px-6 h-screen overflow-y-auto pb-32 flex flex-col items-center justify-center"
                     >
-                        <nav className="flex flex-col gap-4 items-center text-center">
+                        {/* Explicit Close Button for UX - High Visibility */}
+                        <button
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className="absolute top-8 right-6 p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors shadow-sm"
+                        >
+                            <X className="w-8 h-8 text-deep-void" />
+                        </button>
+
+                        <nav className="flex flex-col gap-6 items-center text-center w-full mt-12">
                             <MobileNavLink href="/" label="Home" onClick={() => setIsMobileMenuOpen(false)} />
                             <MobileNavLink href="/services/web" label="Web Development" onClick={() => setIsMobileMenuOpen(false)} />
                             <MobileNavLink href="/services/ai" label="AI Solutions" onClick={() => setIsMobileMenuOpen(false)} />
@@ -214,8 +207,11 @@ function NavLink({ href, label, active = false }: { href: string, label: string,
         <Link
             href={href}
             className={`
-                relative px-4 py-2 rounded-full text-[11px] lg:text-xs font-monument uppercase tracking-wider transition-all duration-300
-                ${active ? 'bg-deep-void text-white shadow-lg' : 'text-gray-600 hover:text-deep-void hover:bg-gray-100 active:scale-95'}
+                relative px-4 py-2 rounded-full text-[11px] lg:text-xs font-monument uppercase tracking-wider transition-all duration-200
+                ${active
+                    ? 'bg-deep-void text-white shadow-md'
+                    : 'text-gray-600 hover:text-deep-void hover:bg-gray-100'
+                }
             `}
         >
             {label}
@@ -233,11 +229,14 @@ function NavDropdown({ label, id, activeId, setActive, children, variants }: any
             onMouseLeave={() => setActive(null)}
         >
             <button className={`
-                flex items-center gap-1 px-4 py-2 rounded-full text-[11px] lg:text-xs font-monument uppercase tracking-wider transition-all duration-300
-                ${isActive ? 'bg-deep-void text-white shadow-lg' : 'text-gray-600 hover:text-deep-void hover:bg-gray-100 active:scale-95'}
+                flex items-center gap-1 px-4 py-2 rounded-full text-[11px] lg:text-xs font-monument uppercase tracking-wider transition-all duration-200
+                ${isActive
+                    ? 'bg-gray-100 text-deep-void'
+                    : 'text-gray-600 hover:text-deep-void hover:bg-gray-100'
+                }
             `}>
                 {label}
-                <ChevronDown className={`w-3 h-3 transition-transform duration-300 ${isActive ? 'rotate-180 text-electric-cyan' : ''}`} />
+                <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${isActive ? 'rotate-180' : ''}`} />
             </button>
 
             <AnimatePresence>
@@ -250,8 +249,8 @@ function NavDropdown({ label, id, activeId, setActive, children, variants }: any
                         style={{ willChange: "opacity, transform" }}
                         className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-auto min-w-[200px]"
                     >
-                        <div className="bg-white backdrop-blur-3xl border border-gray-100 rounded-3xl p-6 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] relative overflow-hidden">
-                            <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-electric-cyan/50 to-transparent" />
+                        <div className="bg-white border border-gray-100 rounded-xl p-6 shadow-xl relative overflow-hidden">
+                            <div className="absolute top-0 left-0 right-0 h-1 bg-ants-blue" />
                             {children}
                         </div>
                     </motion.div>

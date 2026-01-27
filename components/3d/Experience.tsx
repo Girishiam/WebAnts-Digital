@@ -16,9 +16,9 @@ export default function Experience() {
             <Environment preset="city" />
 
             {/* Cinematic Lighting (Optimized: No Realtime Shadows) */}
-            <ambientLight intensity={0.4} color="#1A7CD8" />
-            <spotLight position={[5, 10, 5]} angle={0.5} penumbra={1} intensity={3} color="#3EA4F5" />
-            <pointLight position={[-5, -5, 5]} intensity={2} color="#7B61FF" />
+            <ambientLight intensity={0.6} color="#00f3ff" />
+            <spotLight position={[5, 10, 5]} angle={0.5} penumbra={1} intensity={4} color="#00f3ff" />
+            <pointLight position={[-5, -5, 5]} intensity={3} color="#7B61FF" />
             <rectAreaLight width={10} height={10} position={[0, 5, -5]} color="#FF0055" intensity={5} rotation={[-Math.PI / 2, 0, 0]} />
 
             {/* Post-Processing: The "Digital Nexus" Glow */}
@@ -26,22 +26,26 @@ export default function Experience() {
                 <Bloom
                     luminanceThreshold={1.5} // Higher threshold = fewer glowing pixels
                     mipmapBlur
-                    intensity={1.2}
-                    radius={0.5}
+                    intensity={1.5}
+                    radius={0.6}
                 />
             </EffectComposer>
 
             {/* Atmosphere (Optimized) - Stars removed for Light Mode */}
             {/* <Stars radius={100} depth={50} count={1000} factor={4} saturation={0} fade speed={1} /> */}
-            <Sparkles count={50} scale={20} size={4} speed={0.4} opacity={0.8} noise={1} color="#1A7CD8" />
+            <Sparkles count={50} scale={20} size={5} speed={0.4} opacity={0.8} noise={1} color="#00f3ff" />
 
             <CameraRig />
 
             {/* The "Shrink-Not-Stack" Group */}
             <group scale={[scale, scale, scale]}>
 
-                {/* RIGHT SIDE: The Ant & Stack */}
-                <group position={[4, -1, 0]} rotation={[0, -Math.PI / 2.5, 0]}>
+                {/* LOGIC: Mobile = Bottom Center (Below Text). Desktop = Right Center. */}
+                <group
+                    position={scale < 0.8 ? [0, -1.2, 0] : [5.5, -0.5, 0]}
+                    rotation={scale < 0.8 ? [0, 0, 0] : [0, -Math.PI / 6, 0]}
+                    scale={scale < 0.8 ? 0.6 : 0.8}
+                >
                     <MechaAnt scale={0.6} />
                     <FloatingTechStack />
                     {/* Shadow baked once (frames=1) to prevent per-frame re-calc */}

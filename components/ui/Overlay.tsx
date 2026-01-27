@@ -1,27 +1,29 @@
 import Navbar from './Navbar';
-import HoneycombPattern from './HoneycombPattern';
+import ArchitecturalBackground from './ArchitecturalBackground';
 
 export default function Overlay() {
     return (
         <div className="absolute inset-0 z-10 pointer-events-none flex flex-col justify-between">
+            {/* Background Layer - Removed ArchitecturalBackground for clean look */}
+
             {/* Navigation (Fixed z-50) */}
-            <div className="pointer-events-auto">
+            <div className="pointer-events-auto z-50 relative">
                 <Navbar />
             </div>
 
-            {/* Main Hero Content - Split Grid */}
-            {/* Added pt-24 to clear the fixed navbar */}
-            <div className="flex-1 grid grid-cols-1 md:grid-cols-2 items-center w-full max-w-7xl mx-auto px-6 md:px-12 pt-24 relative">
-                <HoneycombPattern className="opacity-60 left-0 top-0 scale-[100%]" scale={50} />
+            {/* Main Hero Content - Standard Responsive Grid */}
+            <div className="flex-1 w-full xl:max-w-[1700px] mx-auto px-6 md:px-12 pt-32 md:pt-24 relative z-20 grid grid-cols-1 md:grid-cols-2 items-center">
 
-                {/* LEFT: Typography */}
-                <div className="flex flex-col gap-6 items-start text-left pointer-events-auto">
-                    {/* SYSTEM ONLINE Badge moved to Navbar */}
-                    <h1 className="font-monument text-5xl md:text-7xl lg:text-8xl uppercase leading-[0.9] text-deep-void">
+                {/* LEFT: Typography (Always visible, natural flow) */}
+                <div className="flex flex-col gap-6 items-start text-left pointer-events-auto relative">
+                    {/* Text Backdrop Filter - kept subtle for readability */}
+                    <div className="absolute -inset-8 bg-white/5 backdrop-blur-3xl rounded-3xl -z-10 bg-blend-soft-light border border-white/10 shadow-sm" />
+
+                    <h1 className="font-monument text-5xl md:text-7xl lg:text-8xl uppercase leading-[0.9] text-deep-void drop-shadow-sm">
                         The Digital <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-ants-blue to-electric-cyan">Hive</span>
                     </h1>
-                    <p className="max-w-md font-inter text-gray-600 text-sm md:text-base leading-relaxed">
+                    <p className="max-w-md font-inter text-gray-800 font-medium text-sm md:text-base leading-relaxed">
                         We carry the heavy payload of complex technology, making it effortless for you.
                         A biomechanical agency built for the future.
                     </p>
@@ -31,9 +33,9 @@ export default function Overlay() {
                     </button>
                 </div>
 
-                {/* RIGHT: Empty (3D Scene Visible) */}
+                {/* RIGHT: Spacer for Desktop 3D Model */}
                 <div className="hidden md:block">
-                    {/* 3D Model is positioned here in the canvas */}
+                    {/* 3D Model floats here on desktop */}
                 </div>
             </div>
 

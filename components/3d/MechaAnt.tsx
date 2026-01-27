@@ -135,7 +135,7 @@ export default function MechaAnt(props: any) {
                 <Sphere args={[0.15, 12, 12]} position={[0, -0.3, 1.1]} material={materials.nose} />
 
                 {/* Smile */}
-                <Smile position={[0, -0.6, 1.0]} />
+                <Smile position={[0, -0.55, 1.15]} />
 
                 {/* Antennae */}
                 <group ref={leftAntennaRef} position={[-0.6, 0.8, 0]}>
@@ -193,19 +193,21 @@ export default function MechaAnt(props: any) {
 // --- Helpers ---
 
 function Smile({ position }: any) {
-    const points = useMemo(() => {
-        const curve = new THREE.EllipseCurve(0, 0, 0.5, 0.3, Math.PI * 0.2, Math.PI * 0.8, false, 0);
-        return curve.getPoints(50);
-    }, []);
-
     return (
-        <Line
-            points={points}
-            color="#8b4513"
-            lineWidth={3}
-            position={position}
-            rotation={[Math.PI / 2, 0, 0]}
-        />
+        <group position={position} rotation={[0, 0, 0]}>
+            {/* Use Torus for a thick, 3D smile */}
+            {/* args: [radius, tube, radialSegments, tubularSegments, arc] */}
+            {/* rotated to look like a smile */}
+            <mesh rotation={[0, 0, Math.PI * 0.85]}>
+                <torusGeometry args={[0.35, 0.04, 12, 32, Math.PI * 0.7]} />
+                <meshStandardMaterial
+                    color="#ffffff"
+                    emissive="#ffffff"
+                    emissiveIntensity={0.8}
+                    roughness={0.2}
+                />
+            </mesh>
+        </group>
     )
 }
 
