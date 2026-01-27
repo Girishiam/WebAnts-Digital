@@ -56,7 +56,7 @@ export default function TechStack() {
     return (
         <section className="w-full py-20 bg-starlight-white relative overflow-hidden">
 
-            <div className="w-full max-w-[1700px] mx-auto px-4 md:px-6 text-center relative z-10">
+            <div className="w-full max-w-[1700px] mx-auto px-2 md:px-6 text-center relative z-10">
 
                 {/* Section Title */}
                 <h2 className="text-3xl md:text-5xl font-bold text-deep-void mb-4">
@@ -65,18 +65,18 @@ export default function TechStack() {
                 <h2 className="text-3xl md:text-5xl font-bold text-deep-void mb-8">
                     Every Step Of The Process
                 </h2>
-                <p className="text-gray-500 max-w-2xl mx-auto mb-12">
+                <p className="text-gray-500 max-w-2xl mx-auto mb-12 px-2">
                     We leverage cutting-edge frameworks and scalable architecture to build high-performance digital solutions tailored to your growth.
                 </p>
 
                 {/* Tabs */}
-                <div className="flex flex-wrap justify-center gap-4 mb-16">
+                <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-12 md:mb-16">
                     {categories.map((cat) => (
                         <button
                             key={cat}
                             onClick={() => setActiveTab(cat)}
                             className={`
-                                relative px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300
+                                relative px-4 py-2 md:px-6 md:py-3 rounded-full text-xs md:text-sm font-semibold transition-all duration-300
                                 ${activeTab === cat
                                     ? 'bg-ants-blue text-white shadow-lg shadow-ants-blue/30'
                                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
@@ -100,17 +100,17 @@ export default function TechStack() {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95 }}
                             transition={{ duration: 0.3 }}
-                            className="flex flex-wrap justify-center gap-6"
+                            className="grid grid-cols-3 gap-1.5 md:flex md:flex-wrap md:justify-center md:gap-6 w-full"
                         >
                             {techData[activeTab as keyof typeof techData].map((tech) => (
                                 <div
                                     key={tech.name}
-                                    className="group w-32 h-32 md:w-40 md:h-28 bg-white border border-gray-100 rounded-2xl flex flex-col items-center justify-center gap-3 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                                    className="group w-full aspect-square md:w-40 md:h-28 md:aspect-auto bg-white border border-gray-100 rounded-xl md:rounded-2xl flex flex-col items-center justify-center gap-1 md:gap-3 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 p-1 md:p-2"
                                 >
-                                    <div className="w-10 h-10 md:w-12 md:h-12 relative flex items-center justify-center">
-                                        <img src={tech.icon} alt={tech.name} className="w-full h-full object-contain" />
+                                    <div className="w-12 h-12 md:w-12 md:h-12 relative flex items-center justify-center shrink-0">
+                                        <img src={tech.icon} alt={tech.name} className="w-full h-full object-contain p-1" />
                                     </div>
-                                    <span className="text-xs md:text-sm font-medium text-gray-700 group-hover:text-electric-cyan transition-colors">
+                                    <span className="text-xs md:text-sm font-medium text-gray-700 group-hover:text-electric-cyan transition-colors text-center w-full leading-tight line-clamp-2 px-1">
                                         {tech.name}
                                     </span>
                                 </div>
