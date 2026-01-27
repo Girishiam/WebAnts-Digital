@@ -2,6 +2,15 @@ import type { Metadata } from 'next';
 import Hero from "@/components/ui/Hero";
 import TechStack from "@/components/ui/TechStack";
 import ServicesSection from "@/components/ui/ServicesSection";
+import TestimonialsSection from "@/components/ui/TestimonialsSection";
+import WhyChooseUs from "@/components/ui/WhyChooseUs";
+import CaseStudySection from "@/components/ui/CaseStudySection";
+import CEOMessage from "@/components/ui/CEOMessage";
+import MeetExpertsCTA from "@/components/ui/MeetExpertsCTA";
+import FAQSection from "@/components/ui/FAQSection";
+import BlogSection from "@/components/ui/BlogSection";
+import ContactSection from "@/components/ui/ContactSection";
+import NewsletterSection from "@/components/ui/NewsletterSection";
 
 export const metadata: Metadata = {
   title: "WebAnts: Your Digital Growth Partner for Top Rankings & Conversions",
@@ -58,6 +67,15 @@ export default function Home() {
       <Hero />
       <TechStack />
       <ServicesSection />
+      <WhyChooseUs />
+      <CaseStudySection />
+      <CEOMessage />
+      <MeetExpertsCTA />
+      <FAQSection />
+      <BlogSection />
+      <TestimonialsSection />
+      <ContactSection />
+      <NewsletterSection />
     </main>
   );
 }
