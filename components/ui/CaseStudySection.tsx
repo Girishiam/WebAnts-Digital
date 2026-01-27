@@ -12,7 +12,7 @@ const cases = [
         title: 'Neon Horizon',
         category: 'FinTech / Web3',
         description: 'Redefining the digital banking experience with immersive 3D interfaces and real-time blockchain visualization.',
-        image: 'https://images.unsplash.com/photo-1639322537228-ad506d134c11?q=80&w=1000&auto=format&fit=crop',
+        image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop',
         tags: ['Next.js', 'WebGL', 'Solidity'],
         stats: { value: '400%', label: 'User Growth' }
     },

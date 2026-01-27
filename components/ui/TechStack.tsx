@@ -94,23 +94,28 @@ export default function TechStack() {
                     className="flex flex-wrap justify-center gap-6"
                 >
                     <AnimatePresence mode='wait'>
-                        {techData[activeTab as keyof typeof techData].map((tech) => (
-                            <motion.div
-                                key={tech.name}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, scale: 0.9 }}
-                                transition={{ duration: 0.2 }}
-                                className="group w-32 h-32 md:w-40 md:h-28 bg-white border border-gray-100 rounded-2xl flex flex-col items-center justify-center gap-3 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-                            >
-                                <div className="w-10 h-10 md:w-12 md:h-12 relative flex items-center justify-center">
-                                    <img src={tech.icon} alt={tech.name} className="w-full h-full object-contain" />
+                        <motion.div
+                            key={activeTab}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.95 }}
+                            transition={{ duration: 0.3 }}
+                            className="flex flex-wrap justify-center gap-6"
+                        >
+                            {techData[activeTab as keyof typeof techData].map((tech) => (
+                                <div
+                                    key={tech.name}
+                                    className="group w-32 h-32 md:w-40 md:h-28 bg-white border border-gray-100 rounded-2xl flex flex-col items-center justify-center gap-3 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                                >
+                                    <div className="w-10 h-10 md:w-12 md:h-12 relative flex items-center justify-center">
+                                        <img src={tech.icon} alt={tech.name} className="w-full h-full object-contain" />
+                                    </div>
+                                    <span className="text-xs md:text-sm font-medium text-gray-700 group-hover:text-electric-cyan transition-colors">
+                                        {tech.name}
+                                    </span>
                                 </div>
-                                <span className="text-xs md:text-sm font-medium text-gray-700 group-hover:text-electric-cyan transition-colors">
-                                    {tech.name}
-                                </span>
-                            </motion.div>
-                        ))}
+                            ))}
+                        </motion.div>
                     </AnimatePresence>
                 </motion.div>
 
