@@ -16,8 +16,8 @@ export default function Experience() {
             <Environment preset="city" />
 
             {/* Cinematic Lighting (Optimized: No Realtime Shadows) */}
-            <ambientLight intensity={0.6} color="#00f3ff" />
-            <spotLight position={[5, 10, 5]} angle={0.5} penumbra={1} intensity={4} color="#00f3ff" />
+            <ambientLight intensity={0.6} color="#5a5aff" />
+            <spotLight position={[5, 10, 5]} angle={0.5} penumbra={1} intensity={4} color="#5a5aff" />
             <pointLight position={[-5, -5, 5]} intensity={3} color="#7B61FF" />
             <rectAreaLight width={10} height={10} position={[0, 5, -5]} color="#FF0055" intensity={5} rotation={[-Math.PI / 2, 0, 0]} />
 
@@ -33,7 +33,7 @@ export default function Experience() {
 
             {/* Atmosphere (Optimized) - Stars removed for Light Mode */}
             {/* <Stars radius={100} depth={50} count={1000} factor={4} saturation={0} fade speed={1} /> */}
-            <Sparkles count={50} scale={20} size={5} speed={0.4} opacity={0.8} noise={1} color="#00f3ff" />
+            <Sparkles count={50} scale={20} size={5} speed={0.4} opacity={0.8} noise={1} color="#5a5aff" />
 
             <CameraRig />
 

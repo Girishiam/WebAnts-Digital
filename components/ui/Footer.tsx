@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Facebook, Twitter, Instagram, Linkedin, Send, MapPin, Phone, Mail } from 'lucide-react';
@@ -23,11 +24,14 @@ export default function Footer() {
 
                     {/* Column 1: Brand & Contact */}
                     <div className="space-y-8">
-                        <Link href="/" className="flex items-center gap-3 group">
-                            <div className="relative w-10 h-10 flex items-center justify-center rounded-lg bg-linear-to-tr from-ants-blue/20 to-electric-cyan/20 border border-white/10 group-hover:border-electric-cyan/50 transition-colors">
-                                <span className="font-monument text-electric-cyan text-sm">W</span>
-                            </div>
-                            <span className="font-monument text-sm uppercase tracking-widest text-white group-hover:text-electric-cyan transition-colors">WebAnts</span>
+                        <Link href="/" className="inline-block group">
+                            <Image
+                                src="/WebAnts.svg"
+                                alt="WebAnts"
+                                width={180}
+                                height={60}
+                                className="h-12 w-auto object-contain bg-white rounded-xl px-2 py-1 border border-white/10"
+                            />
                         </Link>
                         <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
                             We build future-ready digital experiences using 3D technologies, AI, and biomechanical design principles.
@@ -36,11 +40,11 @@ export default function Footer() {
                         <div className="space-y-4">
                             <div className="flex items-start gap-3 text-gray-400 hover:text-white transition-colors">
                                 <MapPin className="w-5 h-5 text-electric-cyan shrink-0 mt-0.5" />
-                                <span className="text-sm">40-B1 MM Alam Rd, Block B1, Gulberg III, Lahore, Punjab 54660</span>
+                                <span className="text-sm">Dhaka, Bangladesh</span>
                             </div>
-                            <a href="mailto:contact@webants.digital" className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
+                            <a href="mailto:hello@webantsdigital.com" className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
                                 <Mail className="w-5 h-5 text-electric-cyan shrink-0" />
-                                <span className="text-sm">contact@webants.digital</span>
+                                <span className="text-sm">hello@webantsdigital.com</span>
                             </a>
                             <a href="tel:+923260000401" className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
                                 <Phone className="w-5 h-5 text-electric-cyan shrink-0" />
@@ -107,7 +111,7 @@ export default function Footer() {
 
                 {/* Bottom Bar */}
                 <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
-                    <p>© 2026 WebAnts Solutions | All Rights Reserved</p>
+                    <p>© 2026 WebAnts Digital | All Rights Reserved</p>
                     <div className="flex gap-8">
                         <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
                         <Link href="#" className="hover:text-white transition-colors">Terms of Service</Link>

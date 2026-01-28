@@ -31,12 +31,12 @@ export default function CaseStudiesPage() {
                     <div className="col-span-1 md:col-span-2">
                         <OrigamiCard className="h-full">
                             <div className="relative z-10">
-                                <span className="text-electric-cyan font-mono text-xs tracking-widest uppercase mb-2 block">E-commerce • SEO</span>
+                                <span className="text-electric-cyan font-bold text-xs tracking-widest uppercase mb-2 block">E-commerce • SEO</span>
                                 <h3 className="font-monument text-3xl md:text-4xl uppercase mb-4 group-hover:text-ants-blue transition-colors">Project: Neon Commerce</h3>
                                 <p className="text-gray-600 mb-8 max-w-xl">
                                     How we increased organic traffic by 250% and doubled conversion rates for a national lifestyle brand using Next.js and programmatic SEO.
                                 </p>
-                                <ul className="flex flex-wrap gap-4 text-xs font-mono text-deep-void/60">
+                                <ul className="flex flex-wrap gap-4 text-xs font-medium text-deep-void/60">
                                     <li className="px-3 py-1 border border-deep-void/10 rounded-full">Next.js</li>
                                     <li className="px-3 py-1 border border-deep-void/10 rounded-full">Shopify Headless</li>
                                     <li className="px-3 py-1 border border-deep-void/10 rounded-full">Technical SEO</li>
@@ -56,10 +56,10 @@ export default function CaseStudiesPage() {
 function ProjectCard({ title, category, desc, tags }: any) {
     return (
         <OrigamiCard className="h-full">
-            <span className="text-ants-blue font-mono text-xs tracking-widest uppercase mb-2 block">{category}</span>
+            <span className="text-ants-blue font-bold text-xs tracking-widest uppercase mb-2 block">{category}</span>
             <h3 className="font-monument text-2xl uppercase mb-4">{title}</h3>
             <p className="text-gray-600 text-sm mb-6">{desc}</p>
-            <ul className="flex flex-wrap gap-2 text-[10px] font-mono text-deep-void/40">
+            <ul className="flex flex-wrap gap-2 text-[10px] font-medium text-deep-void/40">
                 {tags.map((tag: string) => (
                     <li key={tag} className="px-2 py-1 border border-deep-void/10 rounded-full">{tag}</li>
                 ))}

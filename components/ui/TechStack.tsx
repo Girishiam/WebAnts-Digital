@@ -45,6 +45,13 @@ const techData = {
         { name: 'MongoDB', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' },
         { name: 'Redis', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg' },
         { name: 'SQLite', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg' },
+    ],
+    "CMS & Builders": [
+        { name: 'Shopify', icon: 'https://cdn.worldvectorlogo.com/logos/shopify.svg' },
+        { name: 'WordPress', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg' },
+        { name: 'Webflow', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webflow/webflow-original.svg' },
+        { name: 'Wix', icon: 'https://upload.wikimedia.org/wikipedia/commons/7/76/Wix.com_website_logo.svg' },
+        { name: 'Squarespace', icon: 'https://cdn.worldvectorlogo.com/logos/squarespace.svg' },
     ]
 };
 
@@ -78,7 +85,7 @@ export default function TechStack() {
                             className={`
                                 relative px-4 py-2 md:px-6 md:py-3 rounded-full text-xs md:text-sm font-semibold transition-all duration-300
                                 ${activeTab === cat
-                                    ? 'bg-ants-blue text-white shadow-lg shadow-ants-blue/30'
+                                    ? 'bg-electric-cyan text-white shadow-lg shadow-electric-cyan/30'
                                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                                 }
                             `}

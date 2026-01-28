@@ -3,6 +3,8 @@ import { Montserrat } from "next/font/google";
 import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
 import SmoothScroller from "@/components/SmoothScroller";
+import ScrollToTop from "@/components/ui/ScrollToTop";
+import GlobalLoader from "@/components/ui/GlobalLoader";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -34,9 +36,11 @@ export default function RootLayout({
       <body
         className={`${montserrat.variable} font-sans antialiased bg-starlight-white text-deep-void`}
       >
+        <GlobalLoader />
         <SmoothScroller />
         <Navbar />
         {children}
+        <ScrollToTop />
         <Footer />
       </body>
     </html>

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -47,14 +48,15 @@ export default function Navbar() {
             <div className="relative flex items-center justify-between px-6 md:px-10 py-4 w-full max-w-[1700px] mx-auto">
 
                 {/* Logo Section */}
-                <Link href="/" className="flex items-center gap-3 group z-50">
-                    <div className="relative w-10 h-10 flex items-center justify-center rounded-lg bg-gradient-to-tr from-ants-blue/20 to-electric-cyan/20 border border-deep-void/5 group-hover:border-electric-cyan/50 transition-colors">
-                        <span className="font-monument text-electric-cyan text-sm group-hover:drop-shadow-[0_0_8px_rgba(0,240,255,0.8)] transition-all">W</span>
-                        <span className="absolute top-1 right-1 w-1.5 h-1.5 bg-electric-cyan rounded-full animate-pulse shadow-[0_0_5px_#00F0FF]" />
-                    </div>
-                    <div className="flex flex-col">
-                        <span className="font-monument text-sm uppercase tracking-widest text-deep-void group-hover:text-electric-cyan transition-colors">WebAnts</span>
-                    </div>
+                <Link href="/" className="flex items-center gap-3 z-50">
+                    <Image
+                        src="/WebAnts.svg"
+                        alt="WebAnts Logo"
+                        width={180}
+                        height={50}
+                        className="w-32 md:w-40 h-auto object-contain"
+                        priority
+                    />
                 </Link>
 
                 {/* Desktop Navigation */}
@@ -142,10 +144,10 @@ export default function Navbar() {
                 <div className="hidden md:flex items-center gap-6">
                     <Link
                         href="/contact"
-                        className="relative px-6 py-2 group overflow-hidden rounded-full bg-ants-blue text-white font-monument text-xs tracking-wider hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all duration-300"
+                        className="relative px-6 py-3 group overflow-hidden rounded-xl bg-electric-cyan text-white font-monument text-xs tracking-wider hover:shadow-[0_0_20px_rgba(90,90,255,0.5)] transition-all duration-300"
                     >
                         <span className="relative z-10">Get Proposal</span>
-                        <div className="absolute inset-0 bg-linear-to-r from-electric-cyan to-ants-blue opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </Link>
                 </div>
 
@@ -187,7 +189,7 @@ export default function Navbar() {
                                 <Link
                                     href="/contact"
                                     onClick={() => setIsMobileMenuOpen(false)}
-                                    className="block w-full py-4 bg-ants-blue text-white font-monument text-sm uppercase rounded-full"
+                                    className="block w-full py-4 bg-electric-cyan text-white font-monument text-sm uppercase rounded-xl"
                                 >
                                     Get Proposal
                                 </Link>
@@ -207,14 +209,23 @@ function NavLink({ href, label, active = false }: { href: string, label: string,
         <Link
             href={href}
             className={`
-                relative px-4 py-2 rounded-full text-[11px] lg:text-xs font-monument uppercase tracking-wider transition-all duration-200
+                relative px-2 py-1 text-[11px] lg:text-xs font-monument uppercase tracking-wider transition-all duration-200
                 ${active
-                    ? 'bg-deep-void text-white shadow-md'
-                    : 'text-gray-600 hover:text-deep-void hover:bg-gray-100'
+                    ? 'text-electric-cyan font-bold scale-105'
+                    : 'text-gray-600 hover:text-electric-cyan'
                 }
             `}
         >
             {label}
+            {active && (
+                <motion.span
+                    layoutId="underline"
+                    className="absolute left-0 right-0 -bottom-1 h-0.5 bg-electric-cyan"
+                    initial={{ width: 0 }}
+                    animate={{ width: '100%' }}
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                />
+            )}
         </Link>
     );
 }
@@ -229,14 +240,14 @@ function NavDropdown({ label, id, activeId, setActive, children, variants }: any
             onMouseLeave={() => setActive(null)}
         >
             <button className={`
-                flex items-center gap-1 px-4 py-2 rounded-full text-[11px] lg:text-xs font-monument uppercase tracking-wider transition-all duration-200
+                flex items-center gap-1 px-2 py-1 text-[11px] lg:text-xs font-monument uppercase tracking-wider transition-all duration-200
                 ${isActive
-                    ? 'bg-gray-100 text-deep-void'
-                    : 'text-gray-600 hover:text-deep-void hover:bg-gray-100'
+                    ? 'text-electric-cyan'
+                    : 'text-gray-600 hover:text-electric-cyan'
                 }
             `}>
                 {label}
-                <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${isActive ? 'rotate-180' : ''}`} />
+                <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${isActive ? 'rotate-180 text-electric-cyan' : ''}`} />
             </button>
 
             <AnimatePresence>

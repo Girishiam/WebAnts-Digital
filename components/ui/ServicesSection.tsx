@@ -12,35 +12,40 @@ const services = [
         title: 'Web Engineering',
         description: 'Scalable platforms using Next.js & Distributed Systems.',
         tags: ['Next.js 14', 'Django', 'Kubernetes', 'R3F'],
-        image: '/services/web-engineering.png'
+        image: '/services/web-engineering.png',
+        slug: 'web'
     },
     {
         id: '02',
         title: 'Generative AI',
         description: 'Custom LLMs, RAG Systems & Autonomous Agents.',
         tags: ['RAG Systems', 'Vector DBs', 'AutoGPT', 'LangChain'],
-        image: '/services/gen-ai.png'
+        image: '/services/gen-ai.png',
+        slug: 'llm'
     },
     {
         id: '03',
         title: 'Growth Engineering',
         description: 'Data-driven SEO, AEO & Conversion Optimization.',
         tags: ['Technical SEO', 'Local Pack', 'PPC Ads', 'CRO'],
-        image: '/services/growth.png'
+        image: '/services/growth.png',
+        slug: 'marketing'
     },
     {
         id: '04',
         title: 'Branding & Design',
         description: 'Immersive 3D Aesthetics & User-Centric Interfaces.',
         tags: ['3D Web', 'Motion Design', 'Brand Identity'],
-        image: '/services/branding.png'
+        image: '/services/branding.png',
+        slug: 'frontend'
     },
     {
         id: '05',
         title: 'Local SEO',
         description: 'Dominate Google Maps & Attract Local Customers.',
         tags: ['GMB Optimization', 'Local Citations', 'Geo-Targeting'],
-        image: '/services/local-seo.png'
+        image: '/services/local-seo.png',
+        slug: 'local-seo'
     }
 ];
 
@@ -50,44 +55,54 @@ export default function ServicesSection() {
 
     const ticking = useRef(false);
 
-    const checkScroll = () => {
-        if (!ticking.current) {
-            window.requestAnimationFrame(() => {
-                if (scrollContainerRef.current) {
-                    const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-                    const scrollRange = scrollWidth - clientWidth;
-                    const currentProgress = scrollRange > 0 ? (scrollLeft / scrollRange) * 100 : 0;
-                    setProgress(Math.min(100, Math.max(0, currentProgress)));
-                }
-                ticking.current = false;
-            });
-            ticking.current = true;
+    const updateProgress = () => {
+        if (scrollContainerRef.current) {
+            const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+            const scrollRange = scrollWidth - clientWidth;
+            const currentProgress = scrollRange > 0 ? (scrollLeft / scrollRange) * 100 : 0;
+            setProgress(Math.min(100, Math.max(0, currentProgress)));
         }
     };
 
     useEffect(() => {
         const container = scrollContainerRef.current;
         if (container) {
-            container.addEventListener('scroll', checkScroll, { passive: true });
-            // Initial check
-            checkScroll();
-            // Also check on resize
-            window.addEventListener('resize', checkScroll, { passive: true });
+            container.addEventListener('scroll', updateProgress, { passive: true });
+            window.addEventListener('resize', updateProgress, { passive: true });
+            updateProgress();
         }
         return () => {
-            container?.removeEventListener('scroll', checkScroll);
-            window.removeEventListener('resize', checkScroll);
+            container?.removeEventListener('scroll', updateProgress);
+            window.removeEventListener('resize', updateProgress);
         };
     }, []);
+
+    const [isPaused, setIsPaused] = useState(false);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (!isPaused) {
+                handleScroll('right');
+            }
+        }, 3000);
+        return () => clearInterval(interval);
+    }, [isPaused]);
 
     const handleScroll = (direction: 'left' | 'right') => {
         if (scrollContainerRef.current) {
             const container = scrollContainerRef.current;
-            const scrollAmount = container.clientWidth * 0.8; // Scroll 80% of view
-            container.scrollBy({
-                left: direction === 'left' ? -scrollAmount : scrollAmount,
-                behavior: 'smooth'
-            });
+            const scrollAmount = container.clientWidth < 768 ? container.clientWidth : 420;
+            const maxScroll = container.scrollWidth - container.clientWidth;
+
+            if (direction === 'right') {
+                if (container.scrollLeft >= maxScroll - 10) {
+                    container.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                }
+            } else {
+                container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            }
         }
     };
 
@@ -115,36 +130,44 @@ export default function ServicesSection() {
                             </h3>
                         </div>
 
-                        {/* Navigation Buttons */}
-                        <div className="flex gap-4">
-                            <button
-                                onClick={() => handleScroll('left')}
-                                className="p-4 rounded-full border border-white/10 transition-all duration-300 hover:bg-electric-cyan hover:text-black hover:border-electric-cyan text-white bg-white/5 active:scale-95 group"
-                                aria-label="Scroll left"
-                            >
-                                <ChevronLeft className="w-6 h-6 group-active:scale-90 transition-transform" />
-                            </button>
-                            <button
-                                onClick={() => handleScroll('right')}
-                                className="p-4 rounded-full border border-white/10 transition-all duration-300 hover:bg-electric-cyan hover:text-black hover:border-electric-cyan text-white bg-white/5 active:scale-95 group"
-                                aria-label="Scroll right"
-                            >
-                                <ChevronRight className="w-6 h-6 group-active:scale-90 transition-transform" />
-                            </button>
-                        </div>
+
                     </div>
 
-                    {/* Carousel Track - Native Scroll */}
+                    {/* Carousel Track with Absolute Actions */}
                     <div
-                        ref={scrollContainerRef}
-                        className="flex gap-6 md:gap-8 overflow-x-auto snap-x snap-mandatory pb-8 -mb-8 scrollbar-hide"
-                        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                        className="relative"
+                        onMouseEnter={() => setIsPaused(true)}
+                        onMouseLeave={() => setIsPaused(false)}
                     >
-                        {services.map((service) => (
-                            <div key={service.id} className="snap-center flex-none">
-                                <ServiceCard service={service} />
-                            </div>
-                        ))}
+                        {/* Left Button */}
+                        <button
+                            onClick={() => handleScroll('left')}
+                            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-20 p-3 rounded-full border border-white/10 transition-all duration-300 hover:bg-electric-cyan hover:text-black hover:border-electric-cyan text-white bg-[#02182B]/90 backdrop-blur-md shadow-lg active:scale-95 hidden md:flex items-center justify-center"
+                            aria-label="Scroll left"
+                        >
+                            <ChevronLeft className="w-6 h-6" />
+                        </button>
+
+                        <div
+                            ref={scrollContainerRef}
+                            className="flex gap-6 md:gap-8 overflow-x-auto snap-x snap-mandatory pb-8 -mb-8 scrollbar-hide"
+                            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                        >
+                            {services.map((service) => (
+                                <div key={service.id} className="snap-center flex-none">
+                                    <ServiceCard service={service} />
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Right Button */}
+                        <button
+                            onClick={() => handleScroll('right')}
+                            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-20 p-3 rounded-full border border-white/10 transition-all duration-300 hover:bg-electric-cyan hover:text-black hover:border-electric-cyan text-white bg-[#02182B]/90 backdrop-blur-md shadow-lg active:scale-95 hidden md:flex items-center justify-center"
+                            aria-label="Scroll right"
+                        >
+                            <ChevronRight className="w-6 h-6" />
+                        </button>
                     </div>
 
                     {/* Progress Bar */}
@@ -175,7 +198,7 @@ export default function ServicesSection() {
 
 function ServiceCard({ service }: { service: typeof services[0] }) {
     return (
-        <div className="group relative w-[85vw] md:w-[400px] min-w-[85vw] md:min-w-[400px] flex-none h-[450px] md:h-[550px] overflow-hidden rounded-3xl bg-neutral-900 border border-white/10 flex flex-col justify-end transition-all duration-500 hover:border-electric-cyan/50 hover:shadow-[0_0_30px_rgba(0,255,240,0.1)]">
+        <Link href={`/services/${service.slug}`} className="block group relative w-[85vw] md:w-[400px] min-w-[85vw] md:min-w-[400px] flex-none h-[450px] md:h-[550px] overflow-hidden rounded-3xl bg-neutral-900 border border-white/10 flex flex-col justify-end transition-all duration-500 hover:border-electric-cyan/50 hover:shadow-[0_0_30px_rgba(0,255,240,0.1)]">
 
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
@@ -194,7 +217,7 @@ function ServiceCard({ service }: { service: typeof services[0] }) {
 
                 {/* ID - Floating top right */}
                 <div className="absolute top-8 right-8 w-12 h-12 rounded-full border border-white/20 bg-black/30 backdrop-blur-md flex items-center justify-center group-hover:bg-electric-cyan group-hover:text-black group-hover:border-electric-cyan transition-all duration-300">
-                    <span className="font-mono text-sm">{service.id}</span>
+                    <span className="font-bold text-sm tracking-tighter">{service.id}</span>
                 </div>
 
                 {/* Main Text */}
@@ -221,6 +244,6 @@ function ServiceCard({ service }: { service: typeof services[0] }) {
                     </div>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 }

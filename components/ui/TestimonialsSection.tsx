@@ -159,7 +159,7 @@ export default function TestimonialsSection() {
                                                 <h4 className="text-black font-bold text-sm uppercase tracking-wide">
                                                     {t.name}
                                                 </h4>
-                                                <p className="text-electric-cyan text-xs font-mono">
+                                                <p className="text-electric-cyan text-xs font-bold tracking-wider">
                                                     {t.role}
                                                 </p>
                                             </div>

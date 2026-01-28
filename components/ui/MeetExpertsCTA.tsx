@@ -14,7 +14,7 @@ export default function MeetExpertsCTA() {
                 {/* Honeycomb Background Graphic */}
                 <div className="absolute right-0 top-0 bottom-0 w-1/2 opacity-30 pointer-events-none overflow-hidden">
                     <div className="absolute inset-0 bg-linear-to-l from-[#02182B] via-transparent to-[#02182B] z-10" />
-                    <HoneycombPattern color="#00f3ff" opacity={0.15} scale={30} className="mask-image-linear-fade" />
+                    <HoneycombPattern color="#5a5aff" opacity={0.15} scale={30} className="mask-image-linear-fade" />
                 </div>
 
                 {/* Content */}

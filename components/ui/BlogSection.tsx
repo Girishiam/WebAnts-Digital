@@ -4,36 +4,9 @@ import { motion } from 'framer-motion';
 import { ArrowRight, ArrowUpRight, Calendar, User } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { blogPosts } from '@/data/blog';
 
-const blogs = [
-    {
-        id: 1,
-        title: 'The Future of Web3: Beyond the Hype',
-        excerpt: 'Exploring how decentralized technologies are reshaping digital identity and finance in 2024.',
-        image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=1000&auto=format&fit=crop',
-        date: 'Oct 12, 2023',
-        author: 'Alex Rivera',
-        category: 'Blockchain'
-    },
-    {
-        id: 2,
-        title: 'AI-Driven UX: Designing used Intelligence',
-        excerpt: 'How artificial intelligence is enabling hyper-personalized user experiences without compromising privacy.',
-        image: 'https://images.unsplash.com/photo-1675271591211-126ad94e495d?q=80&w=1000&auto=format&fit=crop',
-        date: 'Nov 05, 2023',
-        author: 'Sarah Chen',
-        category: 'Design'
-    },
-    {
-        id: 3,
-        title: 'Next.js 14: Server Actions Revolution',
-        excerpt: 'A deep dive into the new features of Next.js 14 and how they simplify full-stack development.',
-        image: 'https://images.unsplash.com/photo-1618477247222-acbdb0e159b3?q=80&w=1000&auto=format&fit=crop',
-        date: 'Dec 15, 2023',
-        author: 'Mike Ross',
-        category: 'Development'
-    }
-];
+const blogs = blogPosts.slice(0, 3);
 
 export default function BlogSection() {
     return (
@@ -74,48 +47,52 @@ export default function BlogSection() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.1 }}
-                                className="group relative bg-[#031d34] rounded-4xl overflow-hidden border border-white/5 hover:border-electric-cyan/30 transition-all duration-300 hover:shadow-2xl hover:shadow-electric-cyan/5 flex flex-col"
                             >
-                                {/* Image Container */}
-                                <div className="relative h-64 overflow-hidden">
-                                    <Image
-                                        src={blog.image}
-                                        alt={blog.title}
-                                        fill
-                                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                                    />
-                                    <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-md text-white/90 text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border border-white/10">
-                                        {blog.category}
-                                    </div>
-                                    <div className="absolute inset-0 bg-linear-to-t from-[#031d34] to-transparent opacity-60" />
-                                </div>
-
-                                {/* Content */}
-                                <div className="p-8 flex-1 flex flex-col">
-                                    <div className="flex items-center gap-4 text-xs text-gray-400 mb-4 font-medium uppercase tracking-wide">
-                                        <div className="flex items-center gap-1">
-                                            <Calendar className="w-3 h-3 text-electric-cyan" />
-                                            {blog.date}
+                                <Link
+                                    href={`/blog/${blog.slug}`}
+                                    className="block h-full group relative bg-[#031d34] rounded-4xl overflow-hidden border border-white/5 hover:border-electric-cyan/30 transition-all duration-300 hover:shadow-2xl hover:shadow-electric-cyan/5 flex flex-col"
+                                >
+                                    {/* Image Container */}
+                                    <div className="relative h-64 overflow-hidden">
+                                        <Image
+                                            src={blog.image}
+                                            alt={blog.title}
+                                            fill
+                                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                        />
+                                        <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-md text-white/90 text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border border-white/10">
+                                            {blog.category}
                                         </div>
-                                        <div className="w-1 h-1 rounded-full bg-gray-600" />
-                                        <div className="flex items-center gap-1">
-                                            <User className="w-3 h-3 text-electric-cyan" />
-                                            {blog.author}
+                                        <div className="absolute inset-0 bg-linear-to-t from-[#031d34] to-transparent opacity-60" />
+                                    </div>
+
+                                    {/* Content */}
+                                    <div className="p-8 flex-1 flex flex-col">
+                                        <div className="flex items-center gap-4 text-xs text-gray-400 mb-4 font-medium uppercase tracking-wide">
+                                            <div className="flex items-center gap-1">
+                                                <Calendar className="w-3 h-3 text-electric-cyan" />
+                                                {blog.date}
+                                            </div>
+                                            <div className="w-1 h-1 rounded-full bg-gray-600" />
+                                            <div className="flex items-center gap-1">
+                                                <User className="w-3 h-3 text-electric-cyan" />
+                                                {blog.author}
+                                            </div>
+                                        </div>
+
+                                        <h4 className="text-xl font-bold font-monument text-white mb-4 leading-snug group-hover:text-electric-cyan transition-colors">
+                                            {blog.title}
+                                        </h4>
+
+                                        <p className="text-gray-400 text-sm leading-relaxed mb-8 flex-1">
+                                            {blog.excerpt}
+                                        </p>
+
+                                        <div className="flex items-center text-electric-cyan font-bold text-xs uppercase tracking-widest group-hover:underline decoration-electric-cyan underline-offset-4">
+                                            Read More <ArrowUpRight className="w-3 h-3 ml-1" />
                                         </div>
                                     </div>
-
-                                    <h4 className="text-xl font-bold font-monument text-white mb-4 leading-snug group-hover:text-electric-cyan transition-colors">
-                                        {blog.title}
-                                    </h4>
-
-                                    <p className="text-gray-400 text-sm leading-relaxed mb-8 flex-1">
-                                        {blog.excerpt}
-                                    </p>
-
-                                    <div className="flex items-center text-electric-cyan font-bold text-xs uppercase tracking-widest group-hover:underline decoration-electric-cyan underline-offset-4">
-                                        Read More <ArrowUpRight className="w-3 h-3 ml-1" />
-                                    </div>
-                                </div>
+                                </Link>
                             </motion.div>
                         ))}
                     </div>

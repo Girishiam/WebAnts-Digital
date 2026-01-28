@@ -14,13 +14,15 @@ const config: Config = {
                 "deep-void": "#0a0a0a",
                 "starlight-white": "#F9F9F9",
                 "ants-blue": "#3ea4f5",
-                "electric-cyan": "#00f3ff",
+                "electric-cyan": "#5a5aff",
                 "muted-silver": "#888888",
             },
             fontFamily: {
                 sans: ["var(--font-montserrat)", "sans-serif"],
-                monument: ["var(--font-montserrat)", "sans-serif"], // Mapping monument to montserrat effectively replacing it
-                inter: ["var(--font-montserrat)", "sans-serif"],    // Mapping inter to montserrat
+                serif: ["var(--font-montserrat)", "serif"],      // Force Gotham for serif
+                mono: ["var(--font-montserrat)", "monospace"],   // Force Gotham for mono
+                monument: ["var(--font-montserrat)", "sans-serif"],
+                inter: ["var(--font-montserrat)", "sans-serif"],
             },
             backgroundImage: {
                 "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -43,6 +45,8 @@ const config: Config = {
             }
         },
     },
-    plugins: [],
+    plugins: [
+        require('@tailwindcss/typography'),
+    ],
 };
 export default config;

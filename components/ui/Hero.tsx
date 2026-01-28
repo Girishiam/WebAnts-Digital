@@ -1,9 +1,10 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import HoneycombPattern from './HoneycombPattern';
 import { ArrowRight, Phone } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const techLogos = [
     { name: 'React', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
@@ -23,6 +24,63 @@ const techLogos = [
     { name: 'Tailwind', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg' },
     { name: 'Three.js', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg' }
 ];
+
+const services = [
+    "Web Development",
+    "Artificial Intelligence",
+    "Digital Marketing & Growth"
+];
+
+const letterVariants = {
+    initial: { y: 20, opacity: 0, filter: "blur(10px)" },
+    animate: { y: 0, opacity: 1, filter: "blur(0px)" },
+    exit: { y: -20, opacity: 0, filter: "blur(5px)" }
+};
+
+function ServicesRotator() {
+    const [index, setIndex] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setIndex((prev) => (prev + 1) % services.length);
+        }, 4000);
+        return () => clearInterval(interval);
+    }, []);
+
+    const characters = services[index].split("");
+    const firstSpaceIndex = services[index].indexOf(" ");
+    const highlightLimit = firstSpaceIndex === -1 ? services[index].length : firstSpaceIndex;
+
+    return (
+        <div className="h-20 flex items-center justify-center z-20 overflow-hidden">
+            <AnimatePresence mode="wait">
+                <motion.div
+                    key={index}
+                    className="flex flex-wrap justify-center"
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                >
+                    {characters.map((char, i) => (
+                        <motion.span
+                            key={`${index}-${i}`}
+                            variants={letterVariants}
+                            transition={{
+                                duration: 0.4,
+                                ease: [0.2, 0.65, 0.3, 0.9],
+                                delay: i * 0.03, // Tight character stagger
+                            }}
+                            className={`text-2xl md:text-3xl lg:text-4xl font-black uppercase tracking-widest drop-shadow-[0_0_8px_rgba(90,90,255,0.4)] ${i < highlightLimit ? "text-electric-cyan" : "text-white"}`}
+                            style={{ display: "inline-block", width: char === " " ? "0.5em" : "auto" }} // Handle spaces
+                        >
+                            {char === " " ? "\u00A0" : char}
+                        </motion.span>
+                    ))}
+                </motion.div>
+            </AnimatePresence>
+        </div>
+    );
+}
 
 function FloatingTechLogos() {
     return (
@@ -69,58 +127,65 @@ function FloatingTechLogos() {
 export default function Hero() {
     return (
         <section className="relative w-full max-w-[1700px] mx-auto mt-32 px-4 md:px-6 mb-12">
-            <div className="relative rounded-[2.5rem] bg-[#02182B] overflow-hidden min-h-[75vh] flex flex-col items-center justify-center py-24 px-6 relative group">
+            <div className="relative rounded-[2.5rem] bg-[#02182B] overflow-hidden min-h-[75vh] flex flex-col items-center justify-center py-32 px-6 relative group">
 
                 {/* 1. Dynamic Background Layer */}
                 <FloatingTechLogos />
 
+                {/* Background Text Watermark */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden select-none">
+                    <h1 className="text-[15vw] font-bold text-white/[0.03] tracking-widest uppercase whitespace-nowrap blur-sm">
+                        WebAnts
+                    </h1>
+                </div>
+
                 {/* 2. Honeycomb Pattern - Subtle & Pulsing */}
                 <div className="absolute right-0 top-0 bottom-0 w-full md:w-1/2 opacity-20 mix-blend-screen pointer-events-none">
-                    <HoneycombPattern color="#00f3ff" opacity={0.1} scale={50} className="mask-image-linear-fade animate-pulse-slow" />
+                    <HoneycombPattern color="#5a5aff" opacity={0.1} scale={50} className="mask-image-linear-fade animate-pulse-slow" />
                 </div>
 
                 {/* 3. Central Atmospheric Glow */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-electric-cyan/15 blur-[120px] rounded-full point-events-none" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-electric-cyan/20 blur-[120px] rounded-full point-events-none" />
+
+                {/* Full Section Dark Overlay */}
+                <div className="absolute inset-0 bg-black/20 z-10 pointer-events-none" />
 
                 {/* 4. Main Content */}
                 <div className="relative z-20 flex-1 flex flex-col items-center justify-center text-center max-w-6xl mx-auto">
 
-                    {/* Intro Tag */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, ease: "easeOut" }}
-                        className="mb-8"
-                    >
-                        <h2 className="relative inline-block text-electric-cyan text-base md:text-lg font-bold tracking-[0.3em] uppercase px-8 py-3 border border-electric-cyan/30 rounded-full bg-[#02182B]/80 backdrop-blur-md shadow-[0_0_20px_rgba(0,243,255,0.2)]">
-                            Welcome to WebAnts
-                            <span className="absolute -top-1 -right-1 w-3 h-3 bg-white rounded-full animate-ping" />
-                        </h2>
-                    </motion.div>
+                    {/* Text Content Wrapper with Subtle Blur */}
+                    <div className="relative z-10 max-w-5xl mx-auto mb-10">
+                        {/* Main Headline */}
+                        <motion.h1
+                            className="text-5xl md:text-7xl lg:text-9xl font-monument font-black uppercase text-white leading-[1.05] mb-12 tracking-wide drop-shadow-2xl"
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                        >
+                            <span className="text-transparent bg-clip-text bg-gradient-to-br from-white via-gray-100 to-gray-500 filter drop-shadow-[0_2px_10px_rgba(255,255,255,0.2)]">WebAnts</span> <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-electric-cyan via-blue-400 to-blue-600 relative inline-block pb-2">
+                                Digital
+                            </span>
+                        </motion.h1>
 
-                    {/* Main Headline */}
-                    <motion.h1
-                        className="text-5xl md:text-7xl lg:text-8xl font-monument uppercase text-white leading-[1.1] mb-12 tracking-wide drop-shadow-2xl"
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-                    >
-                        <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400">WebAnts</span> <br />
-                        <span className="text-electric-cyan drop-shadow-[0_0_30px_rgba(0,243,255,0.6)]">Digital</span>
-                    </motion.h1>
+                        <motion.p
+                            className="text-gray-100 text-lg md:text-2xl max-w-4xl mx-auto mb-10 leading-relaxed font-medium tracking-wide"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.8, delay: 0.4 }}
+                        >
+                            We Architect <span className="text-electric-cyan font-extrabold drop-shadow-[0_0_10px_rgba(90,90,255,0.3)]">Intelligent Digital Ecosystems</span> — Fusing Web, AI, And Strategic Growth.
+                        </motion.p>
 
-                    <motion.p
-                        className="text-gray-300 text-lg md:text-2xl max-w-3xl mb-12 leading-relaxed font-light"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.8, delay: 0.4 }}
-                    >
-                        We architect <span className="text-white font-semibold">immersive digital experiences</span> that propel brands to the forefront of the future.
-                    </motion.p>
+                        {/* Animated Services List */}
+                        <div className="h-12 flex items-center justify-center overflow-hidden">
+                            <ServicesRotator />
+                        </div>
+                    </div>
 
                     {/* Buttons */}
                     <motion.div
-                        className="flex flex-col md:flex-row items-center gap-6"
+                        className="flex flex-col md:flex-row items-center gap-6 justify-center"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.6 }}
@@ -138,7 +203,7 @@ export default function Hero() {
 
                         <Link
                             href="/services"
-                            className="group flex items-center gap-3 px-10 py-5 rounded-full border border-white/20 text-white hover:bg-white/10 hover:border-white transition-all duration-300 font-semibold uppercase tracking-wider text-sm backdrop-blur-sm"
+                            className="group flex items-center gap-3 px-10 py-5 rounded-full border border-white/20 text-white hover:bg-white/10 hover:border-white transition-all duration-300 font-bold uppercase tracking-wider text-sm backdrop-blur-sm"
                         >
                             <span>Explore More</span>
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
