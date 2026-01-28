@@ -61,7 +61,7 @@ export default function BlogSection() {
                                             className="object-cover transition-transform duration-700 group-hover:scale-110"
                                         />
                                         <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-md text-white/90 text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border border-white/10">
-                                            {blog.category}
+                                            {blog.tags[0]}
                                         </div>
                                         <div className="absolute inset-0 bg-linear-to-t from-[#031d34] to-transparent opacity-60" />
                                     </div>
