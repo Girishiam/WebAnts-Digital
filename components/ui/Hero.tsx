@@ -5,6 +5,7 @@ import Link from 'next/link';
 import HoneycombPattern from './HoneycombPattern';
 import { ArrowRight, Phone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { companyDetails } from '@/data/company';
 
 const techLogos = [
     { name: 'React', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
@@ -190,8 +191,10 @@ export default function Hero() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.6 }}
                     >
-                        <Link
-                            href="/contact"
+                        <a
+                            href={companyDetails.contact.calendlyUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="group relative overflow-hidden bg-white text-[#02182B] px-10 py-5 rounded-full font-bold uppercase tracking-wider text-sm hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all duration-300"
                         >
                             <span className="relative z-10 flex items-center gap-3">
@@ -199,7 +202,7 @@ export default function Hero() {
                                 Schedule A Call
                             </span>
                             <div className="absolute inset-0 bg-electric-cyan opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
-                        </Link>
+                        </a>
 
                         <Link
                             href="/services"

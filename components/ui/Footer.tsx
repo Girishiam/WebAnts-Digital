@@ -7,6 +7,63 @@ import { MapPin, Phone, Mail } from 'lucide-react';
 import { companyDetails } from '@/data/company';
 import { footerLinks } from '@/data/navigation';
 
+import { useState } from 'react';
+import { useEmail } from '@/hooks/use-email';
+import { Loader2, Check } from 'lucide-react';
+
+function NewsletterForm() {
+    const [email, setEmail] = useState('');
+    const { sendNewsletterSignup, isLoading, status, resetStatus } = useEmail();
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!email) return;
+        const success = await sendNewsletterSignup({ email });
+        if (success) {
+            setEmail('');
+            setTimeout(resetStatus, 5000);
+        }
+    };
+
+    if (status === 'success') {
+        return (
+            <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 text-green-400 text-sm flex items-center gap-2">
+                <Check className="w-4 h-4" />
+                <span>Thanks for subscribing!</span>
+            </div>
+        );
+    }
+
+    return (
+        <form className="space-y-4" onSubmit={handleSubmit}>
+            <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="w-full bg-white/5 border border-white/10 rounded-full px-5 py-3 text-white placeholder:text-gray-600 focus:outline-none focus:border-electric-cyan focus:bg-white/10 transition-colors text-sm"
+            />
+            <button
+                disabled={isLoading}
+                className="bg-electric-cyan text-black px-6 py-2.5 rounded-full font-bold uppercase tracking-wider text-xs hover:bg-white transition-colors w-max disabled:opacity-50 flex items-center gap-2"
+            >
+                {isLoading ? (
+                    <>
+                        <Loader2 className="w-3 h-3 animate-spin" />
+                        Sending...
+                    </>
+                ) : (
+                    'Subscribe'
+                )}
+            </button>
+            {status === 'error' && (
+                <p className="text-red-400 text-xs">Failed to subscribe. Try again.</p>
+            )}
+        </form>
+    );
+}
+
 export default function Footer() {
     return (
         <footer className="relative bg-[#00101d] text-white pt-24 pb-12 overflow-hidden">
@@ -97,16 +154,7 @@ export default function Footer() {
                         <p className="text-gray-400 text-sm mb-6">
                             Get exclusive insights, curated resources and expert guidance.
                         </p>
-                        <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-                            <input
-                                type="email"
-                                placeholder="Email"
-                                className="w-full bg-white/5 border border-white/10 rounded-full px-5 py-3 text-white placeholder:text-gray-600 focus:outline-none focus:border-electric-cyan focus:bg-white/10 transition-colors text-sm"
-                            />
-                            <button className="bg-electric-cyan text-black px-6 py-2.5 rounded-full font-bold uppercase tracking-wider text-xs hover:bg-white transition-colors w-max">
-                                Subscribe
-                            </button>
-                        </form>
+                        <NewsletterForm />
                     </div>
 
                 </div>

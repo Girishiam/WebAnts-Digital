@@ -8,7 +8,8 @@ export const companyDetails = {
         address: "Dhaka, Bangladesh",
         email: "hello@webantsdigital.com",
         phone: "(+92) 326-000-0401", // Verify this regional code
-        googleMapLink: "#"
+        googleMapLink: "#",
+        calendlyUrl: "https://calendly.com/webantsdigital"
     },
     socials: [
         { name: 'Facebook', icon: Facebook, href: '#' },

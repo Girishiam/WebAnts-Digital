@@ -1,12 +1,25 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Send, Mail } from 'lucide-react';
+import { Send, Mail, Loader2, CheckCircle2 } from 'lucide-react';
 import { useState } from 'react';
+import { useEmail } from '@/hooks/use-email';
 
 export default function NewsletterSection() {
     const [email, setEmail] = useState('');
     const [isHovered, setIsHovered] = useState(false);
+    const { sendNewsletterSignup, isLoading, status, resetStatus } = useEmail();
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!email) return;
+
+        const success = await sendNewsletterSignup({ email });
+        if (success) {
+            setEmail('');
+            setTimeout(resetStatus, 5000);
+        }
+    };
 
     return (
         <section className="relative w-full max-w-[1700px] mx-auto px-4 md:px-6 mb-24">
@@ -49,13 +62,14 @@ export default function NewsletterSection() {
 
                     <form
                         className="relative w-full max-w-lg mx-auto flex flex-col md:flex-row items-center bg-gray-50 md:bg-white md:rounded-full border border-gray-200 p-2 focus-within:border-electric-cyan focus-within:shadow-lg focus-within:shadow-electric-cyan/10 transition-all duration-300 gap-2 md:gap-0 rounded-2xl"
-                        onSubmit={(e) => e.preventDefault()}
+                        onSubmit={handleSubmit}
                         onMouseEnter={() => setIsHovered(true)}
                         onMouseLeave={() => setIsHovered(false)}
                     >
                         <Mail className="hidden md:block w-5 h-5 text-gray-400 ml-4 shrink-0 transition-colors" />
 
                         <input
+                            required
                             type="email"
                             placeholder="Enter your email address..."
                             value={email}
@@ -64,21 +78,39 @@ export default function NewsletterSection() {
                         />
 
                         <button
-                            className="w-full md:w-auto bg-[#02182B] text-white px-8 h-12 md:h-14 rounded-xl md:rounded-full font-bold uppercase tracking-wider text-sm hover:bg-electric-cyan hover:text-black transition-all duration-300 flex items-center justify-center gap-2 shrink-0 shadow-lg shadow-black/10"
+                            disabled={isLoading || status === 'success'}
+                            className={`w-full md:w-auto px-8 h-12 md:h-14 rounded-xl md:rounded-full font-bold uppercase tracking-wider text-sm transition-all duration-300 flex items-center justify-center gap-2 shrink-0 shadow-lg ${status === 'success'
+                                ? 'bg-green-500 text-white pointer-events-none'
+                                : 'bg-[#02182B] text-white hover:bg-electric-cyan hover:text-black shadow-black/10'
+                                }`}
                         >
-                            Subscribe
-                            <motion.div
-                                animate={{ x: isHovered ? 3 : 0 }}
-                                transition={{ duration: 0.2 }}
-                            >
-                                <Send className="w-4 h-4" />
-                            </motion.div>
+                            {isLoading ? (
+                                <Loader2 className="w-5 h-5 animate-spin" />
+                            ) : status === 'success' ? (
+                                <>
+                                    Sent
+                                    <CheckCircle2 className="w-5 h-5" />
+                                </>
+                            ) : (
+                                <>
+                                    Subscribe
+                                    <motion.div
+                                        animate={{ x: isHovered ? 3 : 0 }}
+                                        transition={{ duration: 0.2 }}
+                                    >
+                                        <Send className="w-4 h-4" />
+                                    </motion.div>
+                                </>
+                            )}
                         </button>
                     </form>
 
                     <p className="mt-6 text-xs text-gray-400 font-medium tracking-wide">
                         Join 5,000+ subscribers. No spam, ever.
                     </p>
+                    {status === 'error' && (
+                        <p className="mt-2 text-sm text-red-500">Something went wrong. Please try again.</p>
+                    )}
 
                 </div>
             </div>
