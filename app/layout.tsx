@@ -23,7 +23,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: "WebAnts Digital"
-  }
+  },
+
 };
 
 export default function RootLayout({
