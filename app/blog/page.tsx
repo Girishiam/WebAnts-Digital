@@ -25,8 +25,7 @@ export default function BlogListingPage() {
         offset: ["start start", "end end"]
     });
 
-    const featuredPost = blogPosts[0];
-    const otherPosts = blogPosts.slice(1);
+
 
     return (
         <main ref={containerRef} className="min-h-screen bg-[#F0F0F0] text-deep-void relative overflow-hidden selection:bg-electric-cyan selection:text-white">
@@ -61,50 +60,9 @@ export default function BlogListingPage() {
                     </motion.div>
                 </motion.div>
 
-                {/* Featured "Magazine Cover" Post */}
-                <motion.section
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                    className="mb-32 group relative"
-                >
-                    <Link href={`/blog/${featuredPost.slug}`} className="block">
-                        <div className="relative h-[60vh] md:h-[85vh] w-full rounded-[3rem] overflow-hidden">
-                            <Image
-                                src={featuredPost.image}
-                                alt={featuredPost.title}
-                                fill
-                                className="object-cover transition-transform duration-[1.5s] group-hover:scale-105 will-change-transform"
-                                priority
-                            />
-                            <div className="absolute inset-0 bg-linear-to-t from-deep-void/80 via-transparent to-transparent opacity-60" />
-
-                            <div className="absolute bottom-0 left-0 w-full p-8 md:p-16 text-white">
-                                <div className="flex items-center gap-4 mb-6">
-                                    <span className="bg-electric-cyan px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest text-white">
-                                        Editor's Choice
-                                    </span>
-                                    <span className="uppercase text-xs font-medium tracking-widest opacity-80">{featuredPost.readTime}</span>
-                                </div>
-                                <h2 className="text-3xl md:text-6xl lg:text-7xl font-monument uppercase leading-[0.9] max-w-5xl mb-8 group-hover:underline decoration-2 underline-offset-8 transition-all">
-                                    {featuredPost.title}
-                                </h2>
-                                <p className="text-lg md:text-xl text-gray-200 max-w-2xl font-light line-clamp-2 md:line-clamp-none">
-                                    {featuredPost.excerpt}
-                                </p>
-                            </div>
-
-                            <div className="absolute top-8 right-8 md:top-16 md:right-16 bg-white/10 backdrop-blur-md border border-white/20 w-32 h-32 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                                <ArrowUpRight className="w-10 h-10 text-white" />
-                            </div>
-                        </div>
-                    </Link>
-                </motion.section>
-
-                {/* Uniform Grid - Same Height & Width */}
+                {/* Uniform Grid - All Posts */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
-                    {otherPosts.map((post, idx) => (
+                    {blogPosts.map((post, idx) => (
                         <motion.div
                             key={post.id}
                             initial={{ opacity: 0, y: 40 }}

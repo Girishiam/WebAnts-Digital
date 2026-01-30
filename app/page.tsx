@@ -1,16 +1,18 @@
 import type { Metadata } from 'next';
 import Hero from "@/components/ui/Hero";
-import TechStack from "@/components/ui/TechStack";
-import ServicesSection from "@/components/ui/ServicesSection";
-import TestimonialsSection from "@/components/ui/TestimonialsSection";
-import WhyChooseUs from "@/components/ui/WhyChooseUs";
-import CaseStudySection from "@/components/ui/CaseStudySection";
-import CEOMessage from "@/components/ui/CEOMessage";
-import MeetExpertsCTA from "@/components/ui/MeetExpertsCTA";
-import FAQSection from "@/components/ui/FAQSection";
-import BlogSection from "@/components/ui/BlogSection";
-import ContactSection from "@/components/ui/ContactSection";
-import NewsletterSection from "@/components/ui/NewsletterSection";
+import dynamic from 'next/dynamic';
+
+const TechStack = dynamic(() => import("@/components/ui/TechStack"));
+const ServicesSection = dynamic(() => import("@/components/ui/ServicesSection"));
+const TestimonialsSection = dynamic(() => import("@/components/ui/TestimonialsSection"));
+const WhyChooseUs = dynamic(() => import("@/components/ui/WhyChooseUs"));
+const CaseStudySection = dynamic(() => import("@/components/ui/CaseStudySection"));
+const CEOMessage = dynamic(() => import("@/components/ui/CEOMessage"));
+const MeetExpertsCTA = dynamic(() => import("@/components/ui/MeetExpertsCTA"));
+const FAQSection = dynamic(() => import("@/components/ui/FAQSection"));
+const BlogSection = dynamic(() => import("@/components/ui/BlogSection"));
+const ContactSection = dynamic(() => import("@/components/ui/ContactSection"));
+const NewsletterSection = dynamic(() => import("@/components/ui/NewsletterSection"));
 
 export const metadata: Metadata = {
   title: "WebAnts: Your Digital Growth Partner for Top Rankings & Conversions",
