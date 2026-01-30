@@ -6,40 +6,7 @@ import { useRef } from 'react';
 import Image from 'next/image';
 import { ArrowDown, CheckCircle2, Zap, Globe, Users, Trophy } from 'lucide-react';
 import Link from 'next/link';
-
-// Timeline Data
-const timelineEvents = [
-    {
-        year: '2020',
-        title: 'The Inception',
-        description: 'WebAnts born with a singular vision: to bridge the gap between aesthetic design and robust engineering. We started as a small team of three, working out of a shared garage, fueled by caffeine and big dreams.',
-        icon: Zap
-    },
-    {
-        year: '2021',
-        title: 'Global Expansion',
-        description: 'Our commitment to quality quickly crossed borders. We secured our first international enterprise clients and expanded our team to 15 specialists, establishing a 24/7 workflow to serve global time zones.',
-        icon: Globe
-    },
-    {
-        year: '2022',
-        title: 'AI Integration',
-        description: 'Recognizing the shift in the digital landscape, we pivoted early to integrate Artificial Intelligence into our workflow. We launched our first AI-powered chatbot solutions and automated internal processes.',
-        icon: Users
-    },
-    {
-        year: '2023',
-        title: 'Enterprise Excellence',
-        description: 'Scaled our operations to handle high-concurrency applications. Partnered with major tech firms to deliver mission-critical infrastructure. Our code now powers platforms used by millions daily.',
-        icon: Trophy
-    },
-    {
-        year: '2024',
-        title: 'Top Rated Plus',
-        description: 'Achieved "Top Rated Plus" status on major platforms, placing us in the top 3% of global talent. We continue to push boundaries with Next.js 14, RAG Systems, and immersive 3D web experiences.',
-        icon: CheckCircle2
-    }
-];
+import { aboutPageData } from '@/data/about';
 
 export default function AboutPage() {
     const containerRef = useRef(null);
@@ -70,13 +37,13 @@ export default function AboutPage() {
                     transition={{ duration: 0.8 }}
                 >
                     <h2 className="text-electric-cyan font-bold tracking-[0.2em] uppercase text-sm mb-6">
-                        Established 2020
+                        Established {aboutPageData.hero.establishedYear}
                     </h2>
                     <h1 className="text-5xl md:text-8xl font-monument uppercase leading-[0.9] mb-8 text-deep-void">
                         Engineering <br /> The <span className="text-transparent bg-clip-text bg-gradient-to-r from-electric-cyan to-ants-blue">Future</span>
                     </h1>
                     <p className="text-lg md:text-2xl text-gray-500 max-w-3xl mx-auto font-light leading-relaxed">
-                        We are a digital product agency that combines data-driven strategy with world-class engineering to build brands that matter.
+                        {aboutPageData.hero.subtitle}
                     </p>
                 </motion.div>
 
@@ -99,12 +66,7 @@ export default function AboutPage() {
             {/* Stats Section */}
             <section className="relative z-10 py-24 border-y border-gray-200 bg-white/50 backdrop-blur-md">
                 <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
-                    {[
-                        { label: 'Years Experience', value: '4+' },
-                        { label: 'Projects Delivered', value: '150+' },
-                        { label: 'Team Members', value: '25+' },
-                        { label: 'Client Retention', value: '96%' },
-                    ].map((stat, idx) => (
+                    {aboutPageData.stats.map((stat, idx) => (
                         <div key={idx}>
                             <h3 className="text-4xl md:text-6xl font-monument text-deep-void mb-2">{stat.value}</h3>
                             <p className="text-sm font-bold uppercase tracking-widest text-gray-500">{stat.label}</p>
@@ -126,7 +88,7 @@ export default function AboutPage() {
                     <div className="absolute left-4 top-0 bottom-0 w-px bg-gray-200 md:hidden" />
 
                     <div className="space-y-24">
-                        {timelineEvents.map((event, idx) => {
+                        {aboutPageData.timeline.map((event, idx) => {
                             const isEven = idx % 2 === 0;
                             return (
                                 <motion.div

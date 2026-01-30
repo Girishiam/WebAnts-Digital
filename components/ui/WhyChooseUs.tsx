@@ -6,10 +6,10 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
 const stats = [
-    { value: 100, suffix: '+', label: 'Projects Delivered', icon: CheckCircle2 },
-    { value: 25, suffix: '+', label: 'Industries Catered', icon: Users },
+    { value: 120, suffix: '+', label: 'Projects Delivered', icon: CheckCircle2 },
+    { value: 18, suffix: '+', label: 'Industries Catered', icon: Users },
     { value: 98, suffix: '%', label: 'Client Satisfaction', icon: Trophy },
-    { value: 10, suffix: '+', label: 'Years Experience', icon: Zap },
+    { value: 6, suffix: '+', label: 'Years Experience', icon: Zap },
 ];
 
 function Counter({ value, suffix }: { value: number, suffix: string }) {

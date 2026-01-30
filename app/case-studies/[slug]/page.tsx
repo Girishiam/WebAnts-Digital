@@ -83,30 +83,54 @@ export default function CaseStudyDetailsPage() {
                         <div className="p-8 bg-gray-50 rounded-[2rem] border border-gray-100">
                             <h3 className="font-monument uppercase text-lg mb-6">Project Info</h3>
 
-                            <div className="space-y-6">
-                                <div>
-                                    <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Platform</p>
-                                    <p className="font-medium text-lg">Web / Mobile</p>
+                            <div className="space-y-8">
+                                <div className="grid grid-cols-2 gap-6">
+                                    <div>
+                                        <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Year</p>
+                                        <p className="font-monument text-lg">{project.year || '2024'}</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Platform</p>
+                                        <p className="font-medium text-lg text-gray-800">{project.platform}</p>
+                                    </div>
                                 </div>
+
                                 <div>
-                                    <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Tech Stack</p>
+                                    <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Industry</p>
+                                    <p className="font-medium text-lg text-gray-800">{project.industry}</p>
+                                </div>
+
+                                <div>
+                                    <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Services</p>
+                                    <ul className="flex flex-col gap-2">
+                                        {project.services?.map(service => (
+                                            <li key={service} className="flex items-center gap-2 text-sm font-medium text-gray-600">
+                                                <div className="w-1 h-1 rounded-full bg-electric-cyan" />
+                                                {service}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3">Tech Stack</p>
                                     <div className="flex flex-wrap gap-2">
                                         {project.techStack.map(tech => (
-                                            <span key={tech} className="bg-white border border-gray-200 px-3 py-1 rounded-full text-xs font-medium text-gray-600">
+                                            <span key={tech} className="bg-white border border-gray-200 px-3 py-1.5 rounded-lg text-xs font-bold text-deep-void shadow-sm">
                                                 {tech}
                                             </span>
                                         ))}
                                     </div>
                                 </div>
-                                <div>
-                                    <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Live Site</p>
+
+                                <div className="pt-8 border-t border-gray-200">
                                     <a
                                         href={project.link}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-2 text-electric-cyan font-bold hover:underline decoration-2 underline-offset-4"
+                                        className="group flex items-center justify-between w-full bg-black text-white px-6 py-4 rounded-xl font-bold uppercase tracking-wider text-xs hover:bg-electric-cyan hover:text-black transition-all duration-300"
                                     >
-                                        Visit Project <ExternalLink className="w-4 h-4" />
+                                        Visit Live Site <ExternalLink className="w-4 h-4 group-hover:rotate-45 transition-transform" />
                                     </a>
                                 </div>
                             </div>
@@ -137,7 +161,7 @@ export default function CaseStudyDetailsPage() {
                                 </div>
                                 <h2 className="text-3xl md:text-4xl font-monument uppercase">The Challenge</h2>
                             </div>
-                            <p className="text-lg md:text-xl text-gray-600 leading-relaxed pl-16 border-l-2 border-red-100">
+                            <p className="text-lg md:text-xl text-gray-600 leading-relaxed pl-6 md:pl-16 border-l-2 border-red-100 whitespace-pre-line">
                                 {project.challenge}
                             </p>
                         </section>
@@ -150,12 +174,12 @@ export default function CaseStudyDetailsPage() {
                                 </div>
                                 <h2 className="text-3xl md:text-4xl font-monument uppercase">Our Solution</h2>
                             </div>
-                            <div className="pl-16 border-l-2 border-blue-50 space-y-8">
-                                <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
+                            <div className="pl-6 md:pl-16 border-l-2 border-blue-50 space-y-8">
+                                <p className="text-lg md:text-xl text-gray-600 leading-relaxed whitespace-pre-line">
                                     {project.solution}
                                 </p>
 
-                                <div className="bg-gray-50 border border-gray-100 rounded-3xl p-8">
+                                <div className="bg-gray-50 border border-gray-100 rounded-3xl p-6 md:p-8">
                                     <h4 className="font-bold uppercase tracking-widest text-sm mb-6 flex items-center gap-2">
                                         <Layers className="w-4 h-4 text-ants-blue" /> Key Features
                                     </h4>
@@ -179,7 +203,7 @@ export default function CaseStudyDetailsPage() {
                                 </div>
                                 <h2 className="text-3xl md:text-4xl font-monument uppercase">The Result</h2>
                             </div>
-                            <p className="text-lg md:text-xl text-gray-600 leading-relaxed pl-16 border-l-2 border-emerald-100">
+                            <p className="text-lg md:text-xl text-gray-600 leading-relaxed pl-6 md:pl-16 border-l-2 border-emerald-100 whitespace-pre-line">
                                 {project.result}
                             </p>
                         </section>

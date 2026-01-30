@@ -6,10 +6,9 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-    Menu, X, ChevronDown, Code, Target, Database, Bot, Cloud, Cpu,
-    Share2, Search, Globe, ShoppingBag, Zap, Server, Network,
-    Boxes, Layers, MessageSquare, Briefcase, Activity
+    Menu, X, ChevronDown
 } from 'lucide-react';
+import { navbarDropdowns } from '@/data/navigation';
 
 export default function Navbar() {
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -63,77 +62,32 @@ export default function Navbar() {
                 <nav className="hidden xl:flex items-center gap-2">
                     <NavLink href="/" label="Home" active={pathname === '/'} />
 
-                    {/* 1. WEB DEVELOPMENT */}
-                    <NavDropdown
-                        label="Web Development"
-                        id="web-dev"
-                        activeId={activeDropdown}
-                        setActive={setActiveDropdown}
-                        variants={dropdownVariants}
-                    >
-                        <div className="grid grid-cols-2 gap-8 w-[800px] p-2">
-                            <div>
-                                <DropdownSectionTitle icon={<Code />} title="Core Stack" />
-                                <ServiceLink href="/services/frontend" title="Frontend Engineering" desc="Next.js, React, Tailwind, GSAP" />
-                                <ServiceLink href="/services/backend" title="Backend Infrastructure" desc="Django, FastAPI, Node.js" />
-                                <ServiceLink href="/services/databases" title="Database Architecture" desc="PostgreSQL, Redis, MongoDB" />
+                    {navbarDropdowns.map((dropdown) => (
+                        <NavDropdown
+                            key={dropdown.id}
+                            label={dropdown.label}
+                            id={dropdown.id}
+                            activeId={activeDropdown}
+                            setActive={setActiveDropdown}
+                            variants={dropdownVariants}
+                        >
+                            <div className="grid grid-cols-2 gap-8 w-[800px] p-2">
+                                {dropdown.sections.map((section, idx) => (
+                                    <div key={idx}>
+                                        <DropdownSectionTitle icon={<section.icon />} title={section.title} />
+                                        {section.links.map((link, linkIdx) => (
+                                            <ServiceLink
+                                                key={linkIdx}
+                                                href={link.href}
+                                                title={link.title}
+                                                desc={link.desc}
+                                            />
+                                        ))}
+                                    </div>
+                                ))}
                             </div>
-                            <div>
-                                <DropdownSectionTitle icon={<Network />} title="Advanced Systems" />
-                                <ServiceLink href="/services/task-scheduling" title="Task Scheduling" desc="Celery, Distributed Queues" />
-                                <ServiceLink href="/services/realtime" title="Async & WebRTC" desc="WebSockets, Real-time Streaming" />
-                                <ServiceLink href="/services/devops" title="DevOps & Cloud" desc="AWS, Docker, Kubernetes" />
-                            </div>
-                        </div>
-                    </NavDropdown>
-
-                    {/* 2. ARTIFICIAL INTELLIGENCE */}
-                    <NavDropdown
-                        label="Artificial Intelligence"
-                        id="ai"
-                        activeId={activeDropdown}
-                        setActive={setActiveDropdown}
-                        variants={dropdownVariants}
-                    >
-                        <div className="grid grid-cols-2 gap-8 w-[800px] p-2">
-                            <div>
-                                <DropdownSectionTitle icon={<Bot />} title="Generative AI" />
-                                <ServiceLink href="/services/chatbots" title="AI Chatbots" desc="Custom RAG, Context Systems" />
-                                <ServiceLink href="/services/llm" title="LLM Ecosystem" desc="LangChain, LangGraph, LlamaIndex" />
-                                <ServiceLink href="/services/rag" title="RAG Systems" desc="Vector Databases, Hybrid Search" />
-                            </div>
-                            <div>
-                                <DropdownSectionTitle icon={<Zap />} title="Automation" />
-                                <ServiceLink href="/services/n8n" title="Workflow Automation" desc="n8n, Zapier, Make.com" />
-                                <ServiceLink href="/services/agents" title="AI Agents" desc="Botpress, AutoGPT Integration" />
-                                <ServiceLink href="/services/consulting" title="AI Consulting" desc="Strategy & Implementation" />
-                            </div>
-                        </div>
-                    </NavDropdown>
-
-                    {/* 3. DIGITAL MARKETING */}
-                    <NavDropdown
-                        label="Digital Marketing & Growth"
-                        id="marketing"
-                        activeId={activeDropdown}
-                        setActive={setActiveDropdown}
-                        variants={dropdownVariants}
-                    >
-                        <div className="grid grid-cols-2 gap-8 w-[850px] p-2">
-                            <div>
-                                <DropdownSectionTitle icon={<Target />} title="Search Authority" />
-                                <ServiceLink href="/services/seo" title="Advanced SEO" desc="Technical, On-Page, Off-Page" />
-                                <ServiceLink href="/services/aeo" title="Future-Ready AEO" desc="Answer Engine Optimization (AI)" />
-                                <ServiceLink href="/services/local-seo" title="Local Dominance" desc="GMB & Local Pack Ranking" />
-                            </div>
-                            <div>
-                                <DropdownSectionTitle icon={<Share2 />} title="Growth Engineering" />
-                                <ServiceLink href="/services/ppc" title="Paid Media (PPC)" desc="Google Ads, Meta High-ROI" />
-                                <ServiceLink href="/services/social" title="Social & Content" desc="LinkedIn, Instagram, Facebook" />
-                                <ServiceLink href="/services/outreach" title="Outreach" desc="Cold Email & Lead Gen" />
-                            </div>
-                        </div>
-                    </NavDropdown>
+                        </NavDropdown>
+                    ))}
 
                     <NavLink href="/case-studies" label="Case Study" active={pathname === '/case-studies'} />
                     <NavLink href="/about" label="About" active={pathname === '/about'} />

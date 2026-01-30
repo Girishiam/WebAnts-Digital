@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Hero from "@/components/ui/Hero";
 import dynamic from 'next/dynamic';
+import { seoData } from '@/data/company';
 
 const TechStack = dynamic(() => import("@/components/ui/TechStack"));
 const ServicesSection = dynamic(() => import("@/components/ui/ServicesSection"));
@@ -15,9 +16,9 @@ const ContactSection = dynamic(() => import("@/components/ui/ContactSection"));
 const NewsletterSection = dynamic(() => import("@/components/ui/NewsletterSection"));
 
 export const metadata: Metadata = {
-  title: "WebAnts: Your Digital Growth Partner for Top Rankings & Conversions",
-  description: "WebAnts is a premier digital marketing agency offering SEO services, PPC campaigns, and UI/UX design. We are your growth partner for real results.",
-  keywords: ["digital marketing agency", "SEO services", "PPC campaigns", "web design agency", "UI UX design company", "WebAnts", "Growth Partner"],
+  title: seoData.title,
+  description: seoData.description,
+  keywords: seoData.keywords,
 };
 
 export default function Home() {
@@ -27,12 +28,9 @@ export default function Home() {
       {
         "@type": "Organization",
         "name": "WebAnts",
-        "url": "https://webants.digital",
+        "url": seoData.url,
         "description": "Digital Marketing Agency & Growth Partner",
-        "sameAs": [
-          "https://www.linkedin.com/company/webants",
-          "https://twitter.com/webants"
-        ]
+        "sameAs": seoData.socialLinks
       },
       {
         "@type": "Service",

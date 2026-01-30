@@ -3,11 +3,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Facebook, Twitter, Instagram, Linkedin, Send, MapPin, Phone, Mail } from 'lucide-react';
+import { MapPin, Phone, Mail } from 'lucide-react';
+import { companyDetails } from '@/data/company';
+import { footerLinks } from '@/data/navigation';
 
 export default function Footer() {
     return (
-        <footer className="relative bg-[#00101d] text-white pt-24 pb-12 overflow-hidden mt-12">
+        <footer className="relative bg-[#00101d] text-white pt-24 pb-12 overflow-hidden">
 
             {/* Background Creative Elements */}
             <div className="absolute inset-0 pointer-events-none">
@@ -34,28 +36,28 @@ export default function Footer() {
                             />
                         </Link>
                         <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
-                            We build future-ready digital experiences using 3D technologies, AI, and biomechanical design principles.
+                            {companyDetails.description}
                         </p>
 
                         <div className="space-y-4">
                             <div className="flex items-start gap-3 text-gray-400 hover:text-white transition-colors">
                                 <MapPin className="w-5 h-5 text-electric-cyan shrink-0 mt-0.5" />
-                                <span className="text-sm">Dhaka, Bangladesh</span>
+                                <span className="text-sm">{companyDetails.contact.address}</span>
                             </div>
-                            <a href="mailto:hello@webantsdigital.com" className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
+                            <a href={`mailto:${companyDetails.contact.email}`} className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
                                 <Mail className="w-5 h-5 text-electric-cyan shrink-0" />
-                                <span className="text-sm">hello@webantsdigital.com</span>
+                                <span className="text-sm">{companyDetails.contact.email}</span>
                             </a>
-                            <a href="tel:+923260000401" className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
+                            <a href={`tel:${companyDetails.contact.phone}`} className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
                                 <Phone className="w-5 h-5 text-electric-cyan shrink-0" />
-                                <span className="text-sm">(+92) 326-000-0401</span>
+                                <span className="text-sm">{companyDetails.contact.phone}</span>
                             </a>
                         </div>
 
                         <div className="flex gap-4">
-                            {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
-                                <a key={i} href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-electric-cyan hover:text-black transition-all duration-300">
-                                    <Icon className="w-5 h-5" />
+                            {companyDetails.socials.map((social, i) => (
+                                <a key={i} href={social.href} className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-electric-cyan hover:text-black transition-all duration-300">
+                                    <social.icon className="w-5 h-5" />
                                 </a>
                             ))}
                         </div>
@@ -65,10 +67,10 @@ export default function Footer() {
                     <div>
                         <h4 className="font-monument text-sm uppercase tracking-wider text-white mb-8">Services</h4>
                         <ul className="space-y-4">
-                            {['Custom Software Development', 'Cloud Infrastructure', 'QA & Support', 'Next-Gen Technologies', 'Digital Marketing', 'Staff Augmentation'].map((item) => (
-                                <li key={item}>
-                                    <Link href="#" className="text-gray-400 hover:text-electric-cyan transition-colors text-sm block">
-                                        {item}
+                            {footerLinks.services.map((item) => (
+                                <li key={item.label}>
+                                    <Link href={item.href} className="text-gray-400 hover:text-electric-cyan transition-colors text-sm block">
+                                        {item.label}
                                     </Link>
                                 </li>
                             ))}
@@ -79,10 +81,10 @@ export default function Footer() {
                     <div>
                         <h4 className="font-monument text-sm uppercase tracking-wider text-white mb-8">Company</h4>
                         <ul className="space-y-4">
-                            {['Product', 'Case Studies', 'About Us', 'Careers', 'Contact Us', 'Terms and Conditions', 'Privacy Policy'].map((item) => (
-                                <li key={item}>
-                                    <Link href="#" className="text-gray-400 hover:text-electric-cyan transition-colors text-sm block">
-                                        {item}
+                            {footerLinks.company.map((item) => (
+                                <li key={item.label}>
+                                    <Link href={item.href} className="text-gray-400 hover:text-electric-cyan transition-colors text-sm block">
+                                        {item.label}
                                     </Link>
                                 </li>
                             ))}
