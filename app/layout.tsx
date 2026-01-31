@@ -24,6 +24,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     siteName: "WebAnts Digital"
   },
+  metadataBase: new URL("https://webantsdigital.com"),
 
 };
 
