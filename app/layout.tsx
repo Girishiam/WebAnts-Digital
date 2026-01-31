@@ -15,11 +15,11 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: "WebAnts Digital | Future-Ready Web Agency",
-  description: "WebAnts Digital is a premium web agency specializing in 3D experiences, Next.js development, and biomechanical design. We build the future of the web.",
-  keywords: ["Web Agency", "3D Website", "Next.js", "React Three Fiber", "Web Design", "Creative Developer"],
+  description: "WebAnts Digital is a premium web agency specializing in high-end aesthetics, Next.js development, and future-ready interfaces. We build the future of the web.",
+  keywords: ["Web Agency", "Aesthetic Websites", "Next.js", "Modern Web Design", "Creative Developer"],
   openGraph: {
     title: "WebAnts Digital | Future-Ready Web Agency",
-    description: "Experience the digital hive. Premium 3D web development and design.",
+    description: "Forging digital excellence. Aesthetic, future-ready web solutions for next-gen brands.",
     type: "website",
     locale: "en_US",
     siteName: "WebAnts Digital"
