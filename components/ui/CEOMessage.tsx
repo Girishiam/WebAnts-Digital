@@ -34,7 +34,7 @@ export default function CEOMessage() {
 
                         <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
                             <Link
-                                href="https://www.upwork.com/"
+                                href="https://www.upwork.com/freelancers/mdmunibfuyad"
                                 target="_blank"
                                 className="px-8 py-4 bg-[#14a800] text-white rounded-full font-bold text-lg hover:bg-[#14a800]/90 transition-all shadow-lg shadow-[#14a800]/30 flex items-center gap-2"
                             >
@@ -68,7 +68,7 @@ export default function CEOMessage() {
                             <div className="flex flex-col md:flex-row gap-8 items-start mb-8 border-b border-gray-100 pb-8">
                                 <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-white shadow-lg overflow-hidden shrink-0">
                                     {/* Placeholder for Profile Pic - using a generic pro avatar or the one referencing the user if I had the URL. Using a placeholder for now. */}
-                                    <div className="w-full h-full bg-gray-200 flex items-center justify-center text-3xl font-bold text-gray-400">MD</div>
+                                    <Image src="/upwork.png" alt="MD Munib F." fill className="object-cover" />
                                     <div className="absolute bottom-2 right-2 w-5 h-5 bg-[#14a800] border-2 border-white rounded-full" />
                                 </div>
 
